@@ -525,7 +525,7 @@
   .agenda-list li{margin-bottom:4px;}
   .agenda-list li:last-child{margin-bottom:0;}
 
-  /* ================= VISUALIZADOR DE FOTOS ================= */
+  /* ================= VISUALIZADOR DE FOTOS (CARROSSEL COM FOTO GRANDE) ================= */
   .photo-viewer-wrap{
     display: flex;
     flex-direction: column;
@@ -974,7 +974,7 @@
           <div class="folder-tab" style="border-top:3px solid var(--purple);">Dossiê #01</div>
           <div class="comic-villain-card" style="border-top:4.5px solid var(--purple);">
             <div class="villain-avatar-box">
-              <img src="copiao.png" alt="Copião" class="villain-silhouette" onerror="if(!this.dataset.tried){this.dataset.tried='1';this.src='copiao.jpg';}else if(this.dataset.tried==='1'){this.dataset.tried='2';this.src='vilao1.png';}" />
+              <img src="copiao.png" alt="Copião" class="villain-silhouette" />
             </div>
             <div class="villain-body-box">
               <div>
@@ -1617,7 +1617,7 @@
     } else {
       avatarHtml = 
         '<div class="dossier-avatar">' +
-          '<img src="' + v.img + '" alt="' + v.code + '" style="width:100%;height:100%;object-fit:contain;filter:drop-shadow(2px 2px 0 rgba(0,0,0,0.15));" onerror="if(!this.dataset.tried){this.dataset.tried=\'1\';this.src=\'copiao.jpg\';}" />' +
+          '<img src="' + v.img + '" alt="' + v.code + '" style="width:100%;height:100%;object-fit:contain;filter:drop-shadow(2px 2px 0 rgba(0,0,0,0.15));" />' +
         '</div>' +
         '<div>' +
           '<h2 style="font-family:\'Bangers\', cursive;font-size:25px;margin:0 0 2px;color:' + v.color + ';-webkit-text-stroke:0.5px var(--ink);">' + v.code + '</h2>' +
@@ -1669,18 +1669,18 @@
   }
 
   /* ========================================================
-     3. VISUALIZADOR DE FOTOS (CARROSSEL COM FOTO GRANDE)
+     3. VISUALIZADOR DE FOTOS (SEGURO E BLINDADO)
      ======================================================== */
   let currentEnsaioPhotos = [];
   let currentPhotoIndex = 0;
 
   function renderPhotoViewer(photos) {
-    currentEnsaioPhotos = photos || [];
+    currentEnsaioPhotos = (photos && photos.length > 0) ? photos : [];
     currentPhotoIndex = 0;
     const container = document.getElementById("ensPhotoViewerContainer");
     if (!container) return;
 
-    if (!currentEnsaioPhotos || currentEnsaioPhotos.length === 0) {
+    if (currentEnsaioPhotos.length === 0) {
       container.innerHTML = `
         <div class="photo-placeholder-box">
           📷
@@ -1689,29 +1689,30 @@
       return;
     }
 
+    let thumbHtml = '';
+    for (let i = 0; i < currentEnsaioPhotos.length; i++) {
+      thumbHtml += `
+        <div class="photo-thumb-item ${i === 0 ? 'active' : ''}" onclick="selectPhoto(${i})">
+          <img src="${currentEnsaioPhotos[i]}" alt="Miniatura ${i + 1}" />
+        </div>`;
+    }
+
     container.innerHTML = `
       <div class="photo-viewer-wrap">
         <div class="photo-main-frame">
           <button class="photo-nav-btn photo-btn-prev" onclick="navigatePhoto(-1)">‹</button>
-          <img id="mainViewerImg" src="${currentEnsaioPhotos[0]}" alt="Foto do Ensaio" onerror="if(!this.dataset.tried){this.dataset.tried='1';this.src=this.src.replace('.png','.jpg');}" onclick="openLightbox(this.src)" />
+          <img id="mainViewerImg" src="${currentEnsaioPhotos[0]}" alt="Foto do Ensaio" onclick="openLightbox(this.src)" />
           <button class="photo-nav-btn photo-btn-next" onclick="navigatePhoto(1)">›</button>
           <div class="photo-counter-badge" id="photoCounter">1 / ${currentEnsaioPhotos.length}</div>
         </div>
-        <div class="photo-thumb-strip" id="photoThumbStrip"></div>
+        <div class="photo-thumb-strip" id="photoThumbStrip">
+          ${thumbHtml}
+        </div>
       </div>`;
-
-    const strip = document.getElementById("photoThumbStrip");
-    currentEnsaioPhotos.forEach((src, idx) => {
-      const thumb = document.createElement("div");
-      thumb.className = `photo-thumb-item ${idx === 0 ? 'active' : ''}`;
-      thumb.onclick = () => selectPhoto(idx);
-      thumb.innerHTML = `<img src="${src}" alt="Thumb ${idx + 1}" onerror="if(!this.dataset.tried){this.dataset.tried='1';this.src=this.src.replace('.png','.jpg');}" />`;
-      strip.appendChild(thumb);
-    });
   }
 
   function navigatePhoto(direction) {
-    if (!currentEnsaioPhotos.length) return;
+    if (!currentEnsaioPhotos || currentEnsaioPhotos.length === 0) return;
     currentPhotoIndex = (currentPhotoIndex + direction + currentEnsaioPhotos.length) % currentEnsaioPhotos.length;
     updateViewerUI();
   }
@@ -1725,10 +1726,11 @@
     const mainImg = document.getElementById("mainViewerImg");
     const counter = document.getElementById("photoCounter");
     if (mainImg) {
-      delete mainImg.dataset.tried;
       mainImg.src = currentEnsaioPhotos[currentPhotoIndex];
     }
-    if (counter) counter.textContent = `${currentPhotoIndex + 1} / ${currentEnsaioPhotos.length}`;
+    if (counter) {
+      counter.textContent = (currentPhotoIndex + 1) + " / " + currentEnsaioPhotos.length;
+    }
 
     const thumbs = document.querySelectorAll(".photo-thumb-item");
     thumbs.forEach((t, i) => {
@@ -1768,12 +1770,6 @@
     const vImg = document.getElementById("ensVillainImg");
     vImg.src = e.img;
     vImg.alt = e.villain;
-    vImg.onerror = function(){
-      if(!this.dataset.tried){
-        this.dataset.tried = '1';
-        this.src = 'copiao.jpg';
-      }
-    };
 
     renderPhotoViewer(e.photos);
 
@@ -1867,7 +1863,6 @@
         const img = document.createElement('img');
         img.src = src;
         img.className = 'ghost-villain';
-        img.onerror = function(){ if(!this.dataset.tried){ this.dataset.tried='1'; this.src='copiao.jpg'; } };
         placeGhostInSector(img, idx);
         
         img.addEventListener('mouseenter', function() {
@@ -1994,7 +1989,6 @@
         
         const img = document.createElement('img');
         img.src = src;
-        img.onerror = function(){ if(!this.dataset.tried){ this.dataset.tried='1'; this.src='copiao.jpg'; } };
         wrap.appendChild(img);
 
         wrap.addEventListener('click', function() {
