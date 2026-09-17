@@ -131,7 +131,6 @@
     box-shadow: 4px 4px 0 var(--ink);
     display: none;
   }
-  /* ========================================================== */
 
   .brand-banner-single{
     display:flex; align-items:center; justify-content:center;
@@ -1327,7 +1326,17 @@
 
 <script>
   /* ========================================================
-     1. DADOS FUNDAMENTAIS COM FOTOS REAIS EM .PNG
+     FUNÇÃO AUXILIAR PARA URL ABSOLUTA NO GITHUB PAGES
+     ======================================================== */
+  function getAbsoluteUrl(filename) {
+    const origin = window.location.origin;
+    const pathname = window.location.pathname;
+    const basePath = pathname.substring(0, pathname.lastIndexOf('/') + 1);
+    return origin + basePath + filename;
+  }
+
+  /* ========================================================
+     1. DADOS FUNDAMENTAIS COM FOTOS EM PNG
      ======================================================== */
   const ENSAIOS = [
     { 
@@ -1498,7 +1507,7 @@
           <div class="item-dot" style="background:${s.color};">S${s.id}</div>
           <div class="item-info">
             <div class="item-name">${s.name}</div>
-            <div class="item-meta">${s.date} · ${s.time}</div>
+            <div class="item-meta">${s.date} ·${s.time}</div>
           </div>
           <div class="arrow">›</div>
         </div>`;
@@ -1690,6 +1699,17 @@
   let currentEnsaioPhotos = [];
   let currentPhotoIndex = 0;
 
+  // FALLBACK DE SEGURANÇA SE PNG FALHAR
+  function handlePhotoError(imgElement) {
+    if (!imgElement.dataset.step) {
+      imgElement.dataset.step = "jpg";
+      imgElement.src = imgElement.src.replace(/\.png$/i, ".jpg");
+    } else if (imgElement.dataset.step === "jpg") {
+      imgElement.dataset.step = "jpeg";
+      imgElement.src = imgElement.src.replace(/\.jpg$/i, ".jpeg");
+    }
+  }
+
   function renderPhotoViewer(photos) {
     currentEnsaioPhotos = photos || [];
     currentPhotoIndex = 0;
@@ -1705,25 +1725,31 @@
       return;
     }
 
+    // CONSTRÓI AS URLs ABSOLUTAS DEFINITIVAS
+    const absolutePhotos = currentEnsaioPhotos.map(filename => getAbsoluteUrl(filename));
+
     container.innerHTML = `
       <div class="photo-viewer-wrap">
         <div class="photo-main-frame">
           <button class="photo-nav-btn photo-btn-prev" onclick="navigatePhoto(-1)">‹</button>
-          <img id="mainViewerImg" src="${currentEnsaioPhotos[0]}" alt="Foto do Ensaio" onclick="openLightbox(currentEnsaioPhotos[currentPhotoIndex])" />
+          <img id="mainViewerImg" src="${absolutePhotos[0]}" alt="Foto do Ensaio" onerror="handlePhotoError(this)" onclick="openLightbox(this.src)" />
           <button class="photo-nav-btn photo-btn-next" onclick="navigatePhoto(1)">›</button>
-          <div class="photo-counter-badge" id="photoCounter">1 / ${currentEnsaioPhotos.length}</div>
+          <div class="photo-counter-badge" id="photoCounter">1 / ${absolutePhotos.length}</div>
         </div>
         <div class="photo-thumb-strip" id="photoThumbStrip"></div>
       </div>`;
 
     const strip = document.getElementById("photoThumbStrip");
-    currentEnsaioPhotos.forEach((src, idx) => {
+    absolutePhotos.forEach((src, idx) => {
       const thumb = document.createElement("div");
       thumb.className = `photo-thumb-item ${idx === 0 ? 'active' : ''}`;
       thumb.onclick = () => selectPhoto(idx);
-      thumb.innerHTML = `<img src="${src}" alt="Thumb ${idx + 1}" />`;
+      thumb.innerHTML = `<img src="${src}" alt="Thumb ${idx + 1}" onerror="handlePhotoError(this)" />`;
       strip.appendChild(thumb);
     });
+
+    // ATUALIZA A LISTA GLOBAL DO VISUALIZADOR
+    currentEnsaioPhotos = absolutePhotos;
   }
 
   function navigatePhoto(direction) {
@@ -1740,8 +1766,11 @@
   function updateViewerUI() {
     const mainImg = document.getElementById("mainViewerImg");
     const counter = document.getElementById("photoCounter");
-    if (mainImg) mainImg.src = currentEnsaioPhotos[currentPhotoIndex];
-    if (counter) counter.textContent = `${currentPhotoIndex + 1} / ${currentEnsaioPhotos.length}`;
+    if (mainImg) {
+      delete mainImg.dataset.step; // Reseta fallback para a nova foto
+      mainImg.src = currentEnsaioPhotos[currentPhotoIndex];
+    }
+    if (counter) counter.textContent = `${currentPhotoIndex + 1} /${currentEnsaioPhotos.length}`;
 
     const thumbs = document.querySelectorAll(".photo-thumb-item");
     thumbs.forEach((t, i) => {
@@ -2250,501 +2279,4 @@
         height:100%;
         max-height:min(46vh, 46dvh, 335px);
         aspect-ratio:9/16;
-        border-radius:14px;
-        overflow:hidden;
-        box-shadow:0 8px 20px rgba(0,0,0,0.8),0 0 0 2px rgba(243,244,241,0.18);
-        background:#000;
-      }
-      #storyCanvas{
-        width:100%;
-        height:100%;
-        display:block;
-      }
-
-      .control-dock{
-        position:relative;
-        z-index:2;
-        width:100%;
-        max-width:340px;
-        background:#F3F4F1;
-        border:2.5px solid #111111;
-        border-radius:14px;
-        padding:6px 10px;
-        box-shadow:0 6px 16px rgba(0,0,0,0.4),3px 3px 0 #111111;
-        display:flex;
-        flex-direction:column;
-        gap:4px;
-        flex-shrink:0;
-      }
-      .dock-label{
-        font-family:'Comic Neue', cursive, sans-serif;
-        font-weight:700;
-        font-size:10px;
-        letter-spacing:.3px;
-        color:#111111;
-        text-transform:uppercase;
-        text-align:center;
-        line-height:1.1;
-      }
-      .color-bar{
-        display:flex;
-        justify-content:space-between;
-        align-items:center;
-        padding:2px 2px 4px;
-      }
-      .color-dot{
-        width:25px;
-        height:25px;
-        border-radius:50%;
-        border:2px solid #111111;
-        cursor:pointer;
-        box-shadow:1.5px 1.5px 0 #111111;
-        transition:box-shadow .12s ease;
-      }
-      .color-dot.selected{
-        box-shadow:0 0 0 2.5px #111111;
-      }
-      
-      input[type="text"]{
-        width:100%;
-        background:#fff;
-        border:2px solid #111111;
-        border-radius:8px;
-        padding:5px 8px;
-        font-family:'Comic Neue', cursive, sans-serif;
-        font-weight:700;
-        font-size:12px;
-        color:#111111;
-        text-align:center;
-        text-transform:uppercase;
-        outline:none;
-      }
-
-      .btn-download{
-        width:100%;
-        background:#FDD12E;
-        border:2px solid #111111;
-        border-radius:10px;
-        padding:7px 6px;
-        font-family:'Comic Neue', cursive, sans-serif;
-        font-weight:700;
-        font-size:12px;
-        letter-spacing:0.5px;
-        text-transform:uppercase;
-        color:#111111;
-        cursor:pointer;
-        box-shadow:2px 2px 0 #111111;
-        display:inline-flex;
-        align-items:center;
-        justify-content:center;
-        gap:6px;
-        line-height:1.15;
-      }
-      .btn-download:active{transform:translate(2px,2px);box-shadow:none;}
-      .icon-export{width:13px;height:13px;object-fit:contain;flex-shrink:0;}
-    </style></head><body>
-      <header>
-        <h1>GERADOR DE INSÍGNIA</h1>
-        <div class="insta-callout">
-          📸 Poste no Instagram nos Stories e marque a <strong>@guitarrissima</strong>!
-        </div>
-      </header>
-
-      <div class="preview-stage">
-        <div class="preview-card">
-          <canvas id="storyCanvas" width="1080" height="1920"></canvas>
-        </div>
-      </div>
-
-      <div class="control-dock">
-        <div>
-          <div class="dock-label">1. Escolha a cor da sua insígnia</div>
-          <div class="color-bar" id="colorsContainer"></div>
-        </div>
-        <div>
-          <div class="dock-label">2. Digite seu nome de SuperSonoro</div>
-          <input type="text" id="nameField" maxlength="14" placeholder="SEU NOME AQUI">
-        </div>
-        <button class="btn-download" onclick="exportHighResStory()">
-          <img src="exportar.png" class="icon-export" alt="Exportar" />
-          BAIXAR / COMPARTILHAR INSÍGNIA
-        </button>
-      </div>
-
-      <script>
-        var INSIGNIAS = [
-          { name:"Vermelha", badgeColor:"#FE0E31", bgColor:"#0383EC", file:"insigniavermelha.png" },
-          { name:"Rosa",     badgeColor:"#FEA1F2", bgColor:"#0383EC", file:"insigniarosa.png" },
-          { name:"Azul",     badgeColor:"#0383EC", bgColor:"#FE7C02", file:"insigniaazul.png" },
-          { name:"Roxa",     badgeColor:"#AF7AD4", bgColor:"#FE7C02", file:"insigniaroxa.png" },
-          { name:"Laranja",  badgeColor:"#FE7C02", bgColor:"#0383EC", file:"insignialaranja.png" },
-          { name:"Verde",    badgeColor:"#019742", bgColor:"#AF7AD4", file:"insigniaverde.png" }
-        ];
-
-        var activeIndex = 0;
-        var currentName = "SEU NOME AQUI";
-        
-        var preloadedBadges = [];
-        var cloudImage = new Image();
-
-        function preloadAllAssets(){
-          INSIGNIAS.forEach(function(item, idx){
-            var img = new Image();
-            img.src = item.file;
-            img.onload = function(){ renderCanvasStory(); };
-            img.onerror = function(){
-              if(this.src.indexOf(".png") !== -1 && this.src.indexOf(".png.jpg") === -1){
-                this.src = item.file.replace(".png", ".png.jpg");
-              }
-            };
-            preloadedBadges[idx] = img;
-          });
-
-          cloudImage.src = "nuvem.png";
-          cloudImage.onload = function(){ renderCanvasStory(); };
-          cloudImage.onerror = function(){
-            if(this.src.indexOf(".png") !== -1 && this.src.indexOf(".png.jpg") === -1){
-              this.src = "nuvem.png.jpg";
-            }
-          };
-        }
-
-        function init(){
-          preloadAllAssets();
-          renderColorButtons();
-          
-          document.getElementById("nameField").addEventListener("input", function(e){
-            currentName = e.target.value.trim() ? e.target.value.toUpperCase() : "SEU NOME AQUI";
-            renderCanvasStory();
-          });
-
-          renderCanvasStory();
-        }
-
-        function renderColorButtons(){
-          var container = document.getElementById("colorsContainer");
-          container.innerHTML = "";
-          INSIGNIAS.forEach(function(item, idx){
-            var dot = document.createElement("div");
-            dot.className = "color-dot" + (idx === activeIndex ? " selected" : "");
-            dot.style.background = item.badgeColor;
-            dot.title = item.name;
-            dot.onclick = function(){
-              activeIndex = idx;
-              renderColorButtons();
-              renderCanvasStory();
-            };
-            container.appendChild(dot);
-          });
-        }
-
-        function drawCurvedText(ctx, text, centerX, centerY, radius) {
-          ctx.save();
-          ctx.font = "900 96px 'Comic Neue', Impact, 'Arial Black', sans-serif";
-          ctx.fillStyle = "#F3F4F1";
-          ctx.strokeStyle = "#111111";
-          ctx.lineWidth = 18;
-          ctx.lineJoin = "round";
-          ctx.textAlign = "center";
-          ctx.textBaseline = "middle";
-
-          var charAngles = [];
-          var totalAngle = 0;
-          for (var i = 0; i < text.length; i++) {
-            var w = ctx.measureText(text[i]).width + 12;
-            var a = w / radius;
-            charAngles.push(a);
-            totalAngle += a;
-          }
-
-          var currentAngle = (-Math.PI / 2) - (totalAngle / 2);
-          for (var i = 0; i < text.length; i++) {
-            currentAngle += charAngles[i] / 2;
-            ctx.save();
-            var x = centerX + radius * Math.cos(currentAngle);
-            var y = centerY + radius * Math.sin(currentAngle);
-            ctx.translate(x, y);
-            ctx.rotate(currentAngle + Math.PI / 2);
-            ctx.strokeText(text[i], 0, 0);
-            ctx.fillText(text[i], 0, 0);
-            ctx.restore();
-            currentAngle += charAngles[i] / 2;
-          }
-          ctx.restore();
-        }
-
-        function renderCanvasStory(){
-          var canvas = document.getElementById("storyCanvas");
-          var ctx = canvas.getContext("2d");
-          var activeItem = INSIGNIAS[activeIndex];
-          var badgeImage = preloadedBadges[activeIndex];
-
-          ctx.imageSmoothingEnabled = true;
-          ctx.imageSmoothingQuality = "high";
-
-          ctx.fillStyle = activeItem.bgColor;
-          ctx.fillRect(0, 0, 1080, 1920);
-
-          ctx.save();
-          ctx.translate(540, 750);
-          ctx.fillStyle = "rgba(243, 244, 241, 0.15)";
-          var numRays = 24;
-          for(var i=0; i<numRays; i++){
-            ctx.beginPath();
-            ctx.moveTo(0,0);
-            ctx.arc(0, 0, 1500, (i*2*Math.PI)/numRays, ((i*2+1)*Math.PI)/numRays);
-            ctx.lineTo(0,0);
-            ctx.fill();
-          }
-          ctx.restore();
-
-          ctx.fillStyle = "rgba(17, 17, 17, 0.14)";
-          for(var x=20; x<1080; x+=36){
-            for(var y=20; y<1920; y+=36){
-              ctx.beginPath();
-              ctx.arc(x, y, 3.2, 0, Math.PI*2);
-              ctx.fill();
-            }
-          }
-
-          try{
-            if(cloudImage && cloudImage.complete && cloudImage.naturalWidth > 0){
-              ctx.drawImage(cloudImage, 0, 0, 1080, 1920);
-            }
-          }catch(e){}
-
-          drawCurvedText(ctx, "EU AMO MÚSICA", 540, 770, 440);
-
-          try{
-            if(badgeImage && badgeImage.complete && badgeImage.naturalWidth > 0){
-              var maxDim = 680;
-              var imgW = badgeImage.naturalWidth;
-              var imgH = badgeImage.naturalHeight;
-              var ratio = Math.min(maxDim / imgW, maxDim / imgH);
-              var renderW = imgW * ratio;
-              var renderH = imgH * ratio;
-              var posX = (1080 - renderW) / 2;
-              var posY = 430 + (maxDim - renderH) / 2;
-              ctx.drawImage(badgeImage, posX, posY, renderW, renderH);
-            }
-          }catch(e){}
-
-          ctx.save();
-          ctx.font = "900 96px 'Comic Neue', Impact, 'Arial Black', sans-serif";
-          ctx.textAlign = "center";
-          ctx.textBaseline = "middle";
-          ctx.lineWidth = 18;
-          ctx.strokeStyle = "#111111";
-          ctx.lineJoin = "round";
-          ctx.strokeText(currentName, 540, 1270);
-          ctx.fillStyle = "#F3F4F1";
-          ctx.fillText(currentName, 540, 1270);
-          ctx.restore();
-
-          function drawComicBanner(y, rot, text, fontSize){
-            ctx.save();
-            ctx.translate(540, y);
-            ctx.rotate((rot*Math.PI)/180);
-            ctx.fillStyle = "#111111";
-            ctx.fillRect(-620 + 14, -70 + 14, 1240, 140);
-            ctx.fillStyle = "#FDD12E";
-            ctx.strokeStyle = "#111111";
-            ctx.lineWidth = 14;
-            ctx.fillRect(-620, -70, 1240, 140);
-            ctx.strokeRect(-620, -70, 1240, 140);
-            ctx.fillStyle = "#111111";
-            ctx.font = "900 " + fontSize + "px 'Comic Neue', Impact, 'Arial Black', sans-serif";
-            ctx.textAlign = "center";
-            ctx.textBaseline = "middle";
-            ctx.fillText(text, 0, 4);
-            ctx.restore();
-          }
-          drawComicBanner(1550, -2.4, "MINHA INSÍGNIA DE SUPERSONORO!", 56);
-          drawComicBanner(1730, 1.8, "#ENSAIO1 #EUFUI", 56);
-        }
-
-        function exportHighResStory(){
-          var canvas = document.getElementById("storyCanvas");
-          var safeName = currentName.toLowerCase().replace(/[^a-z0-9]/g, "-");
-          canvas.toBlob(function(blob){
-            var file = new File([blob], "story-supersonoro-" + safeName + ".png", { type:"image/png" });
-            if(navigator.canShare && navigator.canShare({ files:[file] })){
-              navigator.share({
-                files:[file],
-                title:"Minha Insígnia SuperSonoros",
-                text:"Eu sou um Supersonoro da liga Guitarríssima!"
-              }).catch(function(){});
-            } else {
-              var a = document.createElement("a");
-              a.download = "story-supersonoro-" + safeName + ".png";
-              a.href = URL.createObjectURL(blob);
-              a.click();
-            }
-          }, "image/png");
-        }
-
-        init();
-      <\/script>
-    </body></html>`,
-
-    batalha: `<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Comic+Neue:wght@700&display=swap" rel="stylesheet">
-    <style>
-      *{box-sizing:border-box;}
-      body{font-family:'Comic Neue', cursive, sans-serif;font-weight:700;line-height:1.15;background:#171512;color:#fff;margin:0;padding:12px;text-align:center;}
-      .box{background:#23201d;border:3.5px solid #F4C531;border-radius:14px;padding:12px 14px;max-width:390px;margin:0 auto;}
-      h1{color:#FF5A79;font-size:20px;letter-spacing:1px;margin:0 0 6px;text-transform:uppercase;font-family:'Bangers', cursive;-webkit-text-stroke:0.5px #000;line-height:1.05;}
-      .hp-bar{background:#444;border-radius:10px;height:16px;overflow:hidden;margin-bottom:6px;border:2px solid #fff;}
-      .hp-fill{background:#E63946;height:100%;width:100%;transition:width .2s;}
-      .boss-sprite{font-size:42px;margin:2px 0;}
-      .prompt{background:#fff;color:#171512;padding:8px 10px;border-radius:8px;font-weight:900;font-size:12.5px;margin-bottom:8px;line-height:1.2;}
-      .grid{display:grid;grid-template-columns:1fr;gap:6px;}
-      .btn-atk{padding:9px 8px;border:2px solid #171512;border-radius:8px;font-family:'Comic Neue', cursive;font-weight:700;font-size:12px;cursor:pointer;color:#fff;text-align:left;line-height:1.2;box-shadow:2px 2px 0 #000;}
-      .status{font-size:13.5px;font-family:'Bangers', cursive;letter-spacing:0.8px;margin-top:6px;min-height:16px;color:#F4C531;text-transform:uppercase;}
-    </style></head><body>
-    <div class="box">
-      <h1>Ameaça Final</h1>
-      <div class="hp-bar"><div class="hp-fill" id="hp"></div></div>
-      <div class="boss-sprite" id="boss">👾</div>
-      <div class="prompt" id="prompt">Carregando desafio...</div>
-      <div class="grid" id="actionsBox"></div>
-      <div class="status" id="status">Prepare seus acordes!</div>
-    </div>
-    <script>
-      let bossHp=100, curNeeded="", lastIndex=-1;
-      
-      var CHALLENGES = [
-        {
-          threat: "O Copião ataca: 'Para que criar algo seu? Copiar dos outros é mais fácil!'",
-          needed: "autenticidade",
-          options: [
-            { id: "autenticidade", text: "Defendo minha própria voz e toco do meu jeito!", color: "#8E5FC7" },
-            { id: "escuta",        text: "Toco mais alto para abafar a banda inteira.",   color: "#D9A62B" },
-            { id: "disciplina",    text: "Deixo para tentar acertar apenas no show.",    color: "#E8792B" },
-            { id: "iniciativa",    text: "Fico esperando a dúvida passar para começar.", color: "#3CB878" }
-          ]
-        },
-        {
-          threat: "A Ameaça #2 ataca: O palco virou um caos com todo mundo disputando volume!",
-          needed: "escuta",
-          options: [
-            { id: "escuta",        text: "Escuto o grupo com atenção e equilibro meu volume!", color: "#D9A62B" },
-            { id: "autenticidade", text: "Apenas copio um solo pronto da internet.",          color: "#8E5FC7" },
-            { id: "disciplina",    text: "Toco uma vez por acaso e já considero pronto.",    color: "#E8792B" },
-            { id: "iniciativa",    text: "Fico paralisado com receio de errar o acorde.",     color: "#3CB878" }
-          ]
-        },
-        {
-          threat: "A Ameaça #3 tenta te iludir: 'Acertou uma vez, já chega! No palco a sorte resolve!'",
-          needed: "disciplina",
-          options: [
-            { id: "disciplina",    text: "Uso o Repeteco consciente até conquistar segurança!", color: "#E8792B" },
-            { id: "autenticidade", text: "Toco sem identidade própria só para terminar logo.", color: "#8E5FC7" },
-            { id: "escuta",        text: "Toco no volume máximo sem me importar com a banda.", color: "#D9A62B" },
-            { id: "iniciativa",    text: "Desisto antes mesmo de subir ao palco.",             color: "#3CB878" }
-          ]
-        },
-        {
-          threat: "A Ameaça #4 planta a dúvida: 'E se der branco na frente de todos? Melhor não tocar hoje...'",
-          needed: "iniciativa",
-          options: [
-            { id: "iniciativa",    text: "Dou a primeira nota e toco mesmo com frio na barriga!", color: "#3CB878" },
-            { id: "autenticidade", text: "Tento copiar rigidamente o guitarrista famoso.",         color: "#8E5FC7" },
-            { id: "escuta",        text: "Disputo para aparecer mais do que meus colegas.",         color: "#D9A62B" },
-            { id: "disciplina",    text: "Acredito que talento substitui todo o ensaio.",          color: "#E8792B" }
-          ]
-        }
-      ];
-
-      function renderTurn() {
-        if(bossHp <= 0) {
-          document.getElementById("boss").textContent = "💥🎉";
-          document.getElementById("prompt").textContent = "VITÓRIA DA LIGA! O SOM FOI SALVO!";
-          document.getElementById("status").textContent = "Os 4 superpoderes derrotaram a Ameaça Final!";
-          document.getElementById("actionsBox").innerHTML = "";
-          return;
-        }
-
-        let nextIdx;
-        do {
-          nextIdx = Math.floor(Math.random() * CHALLENGES.length);
-        } while (nextIdx === lastIndex);
-        lastIndex = nextIdx;
-
-        var current = CHALLENGES[nextIdx];
-        curNeeded = current.needed;
-        document.getElementById("prompt").textContent = current.threat;
-
-        var box = document.getElementById("actionsBox");
-        box.innerHTML = "";
-        
-        var shuffledOpts = current.options.slice();
-        shuffledOpts.sort(function() { return 0.5 - Math.random(); });
-
-        shuffledOpts.forEach(function(opt) {
-          var btn = document.createElement("button");
-          btn.className = "btn-atk";
-          btn.style.background = opt.color;
-          btn.textContent = opt.text;
-          btn.onclick = function() { attack(opt.id); };
-          box.appendChild(btn);
-        });
-      }
-
-      function attack(choice) {
-        if(bossHp <= 0) return;
-        if(choice === curNeeded) {
-          bossHp -= 25;
-          if(bossHp < 0) bossHp = 0;
-          document.getElementById("hp").style.width = bossHp + "%";
-          document.getElementById("status").textContent = "ACORDE PERFEITO! -25% HP";
-          document.getElementById("boss").textContent = "⚡👾⚡";
-          setTimeout(function() { if(bossHp > 0) document.getElementById("boss").textContent = "👾"; }, 250);
-        } else {
-          document.getElementById("status").textContent = "Atitude inadequada! Responda com a virtude certa!";
-        }
-        setTimeout(renderTurn, 450);
-      }
-
-      renderTurn();
-    <\/script>
-    </body></html>`
-  };
-
-  function openGame(key){
-    const frame = document.getElementById("gameFrame");
-    const modalBox = document.getElementById("modalBox");
-
-    if(key === 'quiz') {
-      modalBox.style.height = "490px";
-    } else if(key === 'batalha') {
-      modalBox.style.height = "510px";
-    } else {
-      modalBox.style.height = "90vh";
-    }
-
-    frame.srcdoc = GAMES[key];
-    document.getElementById("gameModal").classList.add("show");
-  }
-  function closeGame(){
-    document.getElementById("gameModal").classList.remove("show");
-    document.getElementById("gameFrame").srcdoc = "";
-  }
-
-  window.addEventListener('click', function(e) {
-    const vModal = document.getElementById('villainModal');
-    if (e.target === vModal) closeVillainModal();
-    const gModal = document.getElementById('gameModal');
-    if (e.target === gModal) closeGame();
-  });
-
-  /* INICIALIZAÇÃO */
-  renderDynamicTexts();
-  renderEnsaios();
-  renderLockedSessions();
-  try { renderTabBackdrop("historia"); } catch(e) {}
-</script>
-</body>
-</html>
+        border
