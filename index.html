@@ -1684,11 +1684,11 @@
   let currentEnsaioPhotos = [];
   let currentPhotoIndex = 0;
 
-  // Mapa de rotações exatas direto no estilo da tag img:
+  // Mapa de rotações exato conforme solicitado:
   // Foto 4 (índice 3): 180 graus (de ponta cabeça)
   // Foto 6 (índice 5): 180 graus (de ponta cabeça)
   // Foto 7 (índice 6): 90 graus para a esquerda (-90deg)
-  // Demais fotos (1, 2, 3, 5, 8, 9, 10): 0deg (posição original)
+  // Demais fotos (1, 2, 3, 5, 8, 9, 10): 0 graus (sem rotação)
   function getPhotoStyle(idx) {
     if (idx === 3) return "transform: rotate(180deg);";
     if (idx === 5) return "transform: rotate(180deg);";
