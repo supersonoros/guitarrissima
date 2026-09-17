@@ -554,6 +554,7 @@
     display: block;
     cursor: pointer;
     transition: transform .25s ease;
+    image-orientation: from-image;
   }
 
   .photo-nav-btn{
@@ -633,6 +634,7 @@
     object-fit: cover;
     display: block;
     transition: transform .2s ease;
+    image-orientation: from-image;
   }
 
   .photo-placeholder-box{
@@ -889,6 +891,7 @@
     border:3.5px solid var(--yellow); border-radius:14px;
     box-shadow:0 8px 30px rgba(0,0,0,.8);
     transition: transform .2s ease;
+    image-orientation: from-image;
   }
 
   /* ========================================================
@@ -1627,7 +1630,7 @@
     } else {
       avatarHtml = 
         '<div class="dossier-avatar">' +
-          '<img src="' + v.img + '" alt="' + v.code + '" style="width:100%;height:100%;object-fit:contain;filter:drop-shadow(2px 2px 0 rgba(0,0,0,0.15));" />' +
+          '<img src="' + v.img + '" alt="' + v.code + '" style="width:100%;height:100%;object-fit:contain;filter:drop-shadow(2px 2px 0 rgba(0,0,0,0.15));" onerror="if(!this.dataset.tried){this.dataset.tried='1';this.src='copiao.jpg';}" />' +
         '</div>' +
         '<div>' +
           '<h2 style="font-family:\'Bangers\', cursive;font-size:25px;margin:0 0 2px;color:' + v.color + ';-webkit-text-stroke:0.5px var(--ink);">' + v.code + '</h2>' +
@@ -1679,26 +1682,37 @@
   }
 
   /* ========================================================
-     3. VISUALIZADOR DE FOTOS (ROTAÇÃO EXATA E INLINE)
+     3. VISUALIZADOR DE FOTOS (COM CONFIGURAÇÃO EXPLÍCITA)
      ======================================================== */
   let currentEnsaioPhotos = [];
   let currentPhotoIndex = 0;
 
-  // Foto 4 (idx 3): vira para direita (90deg)
-  // Foto 5 (idx 4): vira para esquerda (-90deg)
-  // Foto 6 (idx 5): vira para direita (90deg)
-  // Nenhuma outra foto é alterada.
+  // Dicionário com os graus exatos de cada foto (1 a 10):
+  // Foto 4 (índice 3): 90deg (direita)
+  // Foto 5 (índice 4): -90deg (esquerda)
+  // Foto 6 (índice 5): 90deg (direita)
+  // Todas as demais: 0deg (sem rotação)
+  const PHOTO_ROTATIONS = {
+    3: 90,   // Foto 4
+    4: -90,  // Foto 5
+    5: 90    // Foto 6
+  };
+
   function getPhotoStyle(idx) {
-    if (idx === 3) return "transform: rotate(90deg) scale(0.72);";
-    if (idx === 4) return "transform: rotate(-90deg) scale(0.72);";
-    if (idx === 5) return "transform: rotate(90deg) scale(0.72);";
+    const deg = PHOTO_ROTATIONS[idx] || 0;
+    if (deg !== 0) {
+      const scale = (Math.abs(deg) === 90 || Math.abs(deg) === 270) ? 0.72 : 1;
+      return "transform: rotate(" + deg + "deg) scale(" + scale + ");";
+    }
     return "transform: none;";
   }
 
   function getThumbStyle(idx) {
-    if (idx === 3) return "transform: rotate(90deg) scale(1.35);";
-    if (idx === 4) return "transform: rotate(-90deg) scale(1.35);";
-    if (idx === 5) return "transform: rotate(90deg) scale(1.35);";
+    const deg = PHOTO_ROTATIONS[idx] || 0;
+    if (deg !== 0) {
+      const scale = (Math.abs(deg) === 90 || Math.abs(deg) === 270) ? 1.35 : 1;
+      return "transform: rotate(" + deg + "deg) scale(" + scale + ");";
+    }
     return "transform: none;";
   }
 
