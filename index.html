@@ -127,6 +127,7 @@
     box-shadow: 4px 4px 0 var(--ink);
     display: none;
   }
+  /* ========================================================== */
 
   .brand-banner-single{
     display:flex; align-items:center; justify-content:center;
@@ -974,7 +975,7 @@
           <div class="folder-tab" style="border-top:3px solid var(--purple);">Dossiê #01</div>
           <div class="comic-villain-card" style="border-top:4.5px solid var(--purple);">
             <div class="villain-avatar-box">
-              <img src="copiao.png" alt="Copião" class="villain-silhouette" />
+              <img src="copiao.png" alt="Copião" class="villain-silhouette" onerror="if(!this.dataset.tried){this.dataset.tried='1';this.src='copiao.jpg';}else if(this.dataset.tried==='1'){this.dataset.tried='2';this.src='vilao1.png';}" />
             </div>
             <div class="villain-body-box">
               <div>
@@ -1322,7 +1323,7 @@
 
 <script>
   /* ========================================================
-     1. DADOS FUNDAMENTAIS COM AS 7 FOTOS REAIS DO ENSAIO 1
+     1. DADOS FUNDAMENTAIS COM AS 10 FOTOS REAIS DO ENSAIO 1
      ======================================================== */
   const ENSAIOS = [
     { 
@@ -1342,7 +1343,10 @@
         "ensaio1-foto4.png",
         "ensaio1-foto5.png",
         "ensaio1-foto6.png",
-        "ensaio1-foto7.png"
+        "ensaio1-foto7.png",
+        "ensaio1-foto8.png",
+        "ensaio1-foto9.png",
+        "ensaio1-foto10.png"
       ],
       agenda: 
         '<div class="ens-mission-card">' +
