@@ -1620,7 +1620,7 @@
     } else {
       avatarHtml = 
         '<div class="dossier-avatar">' +
-          '<img src="' + v.img + '" alt="' + v.code + '" style="width:100%;height:100%;object-fit:contain;filter:drop-shadow(2px 2px 0 rgba(0,0,0,0.15));" onerror="if(!this.dataset.tried){this.dataset.tried=\'1\';this.src=\'copiao.jpg\';}" />' +
+          '<img src="' + v.img + '" alt="' + v.code + '" style="width:100%;height:100%;object-fit:contain;filter:drop-shadow(2px 2px 0 rgba(0,0,0,0.15));" />' +
         '</div>' +
         '<div>' +
           '<h2 style="font-family:\'Bangers\', cursive;font-size:25px;margin:0 0 2px;color:' + v.color + ';-webkit-text-stroke:0.5px var(--ink);">' + v.code + '</h2>' +
@@ -1771,12 +1771,6 @@
     const vImg = document.getElementById("ensVillainImg");
     vImg.src = e.img;
     vImg.alt = e.villain;
-    vImg.onerror = function(){
-      if(!this.dataset.tried){
-        this.dataset.tried = '1';
-        this.src = 'copiao.jpg';
-      }
-    };
 
     renderPhotoViewer(e.photos);
 
@@ -1870,7 +1864,6 @@
         const img = document.createElement('img');
         img.src = src;
         img.className = 'ghost-villain';
-        img.onerror = function(){ if(!this.dataset.tried){ this.dataset.tried='1'; this.src='copiao.jpg'; } };
         placeGhostInSector(img, idx);
         
         img.addEventListener('mouseenter', function() {
@@ -1997,7 +1990,6 @@
         
         const img = document.createElement('img');
         img.src = src;
-        img.onerror = function(){ if(!this.dataset.tried){ this.dataset.tried='1'; this.src='copiao.jpg'; } };
         wrap.appendChild(img);
 
         wrap.addEventListener('click', function() {
