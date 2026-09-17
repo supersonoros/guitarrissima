@@ -536,7 +536,7 @@
     position: relative;
     width: 100%;
     aspect-ratio: 4/3;
-    max-height: 380px;
+    max-height: 420px;
     background: #171512;
     border: 3.5px solid var(--ink);
     border-radius: 14px;
@@ -553,11 +553,15 @@
     background: #171512;
     display: block;
     cursor: pointer;
-    transition: transform .2s ease;
+    transition: transform .25s ease;
   }
-  /* CLASSE DE CORREÇÃO PARA AS FOTOS QUE FICARAM DEITADAS */
-  .photo-rotated {
-    transform: rotate(90deg) scale(0.72) !important;
+
+  /* CLASSES DE ROTAÇÃO PRECISA */
+  .rotate-180 {
+    transform: rotate(180deg) !important;
+  }
+  .rotate-left {
+    transform: rotate(-90deg) scale(0.72) !important;
   }
 
   .photo-nav-btn{
@@ -611,8 +615,8 @@
     -webkit-overflow-scrolling: touch;
   }
   .photo-thumb-item{
-    width: 58px;
-    height: 58px;
+    width: 60px;
+    height: 60px;
     flex-shrink: 0;
     border-radius: 8px;
     border: 2px solid var(--ink);
@@ -637,8 +641,11 @@
     object-fit: cover;
     display: block;
   }
-  .photo-thumb-item img.photo-rotated {
-    transform: rotate(90deg) scale(1.3) !important;
+  .photo-thumb-item img.rotate-180 {
+    transform: rotate(180deg) !important;
+  }
+  .photo-thumb-item img.rotate-left {
+    transform: rotate(-90deg) scale(1.35) !important;
   }
 
   .photo-placeholder-box{
@@ -1335,7 +1342,7 @@
 
 <script>
   /* ========================================================
-     1. DADOS FUNDAMENTAIS COM AS 10 FOTOS REAIS DO ENSAIO 1
+     1. DADOS FUNDAMENTAIS
      ======================================================== */
   const ENSAIOS = [
     { 
@@ -1633,7 +1640,7 @@
     } else {
       avatarHtml = 
         '<div class="dossier-avatar">' +
-          '<img src="' + v.img + '" alt="' + v.code + '" style="width:100%;height:100%;object-fit:contain;filter:drop-shadow(2px 2px 0 rgba(0,0,0,0.15));" onerror="if(!this.dataset.tried){this.dataset.tried=\'1\';this.src=\'copiao.jpg\';}" />' +
+          '<img src="' + v.img + '" alt="' + v.code + '" style="width:100%;height:100%;object-fit:contain;filter:drop-shadow(2px 2px 0 rgba(0,0,0,0.15));" />' +
         '</div>' +
         '<div>' +
           '<h2 style="font-family:\'Bangers\', cursive;font-size:25px;margin:0 0 2px;color:' + v.color + ';-webkit-text-stroke:0.5px var(--ink);">' + v.code + '</h2>' +
@@ -1685,13 +1692,19 @@
   }
 
   /* ========================================================
-     3. VISUALIZADOR DE FOTOS COM CORREÇÃO DE ROTAÇÃO
+     3. VISUALIZADOR DE FOTOS (OTIMIZADO COM ROTAÇÕES CORRETAS)
      ======================================================== */
   let currentEnsaioPhotos = [];
   let currentPhotoIndex = 0;
 
-  // Índices das fotos que precisam de rotação (4, 5 e 6 no índice base 0 são 3, 4 e 5)
-  const ROTATED_PHOTOS_INDEXES = [3, 4, 5];
+  // Mapa de rotação:
+  // Fotos 2, 4 e 6 (índices 1, 3 e 5) -> 180deg (de ponta cabeça)
+  // Foto 7 (índice 6) -> -90deg (girar para a esquerda)
+  function getPhotoRotationClass(idx) {
+    if (idx === 1 || idx === 3 || idx === 5) return 'rotate-180';
+    if (idx === 6) return 'rotate-left';
+    return '';
+  }
 
   function renderPhotoViewer(photos) {
     currentEnsaioPhotos = (photos && photos.length > 0) ? photos : [];
@@ -1710,20 +1723,20 @@
 
     let thumbHtml = '';
     for (let i = 0; i < currentEnsaioPhotos.length; i++) {
-      const isRotated = ROTATED_PHOTOS_INDEXES.includes(i) ? 'photo-rotated' : '';
+      const rotClass = getPhotoRotationClass(i);
       thumbHtml += `
         <div class="photo-thumb-item ${i === 0 ? 'active' : ''}" onclick="selectPhoto(${i})">
-          <img src="${currentEnsaioPhotos[i]}" class="${isRotated}" alt="Miniatura ${i + 1}" />
+          <img src="${currentEnsaioPhotos[i]}" class="${rotClass}" alt="Miniatura ${i + 1}" loading="lazy" decoding="async" />
         </div>`;
     }
 
-    const firstIsRotated = ROTATED_PHOTOS_INDEXES.includes(0) ? 'photo-rotated' : '';
+    const firstRot = getPhotoRotationClass(0);
 
     container.innerHTML = `
       <div class="photo-viewer-wrap">
         <div class="photo-main-frame">
           <button class="photo-nav-btn photo-btn-prev" onclick="navigatePhoto(-1)">‹</button>
-          <img id="mainViewerImg" src="${currentEnsaioPhotos[0]}" class="${firstIsRotated}" alt="Foto do Ensaio" onclick="openLightbox(this.src, ${ROTATED_PHOTOS_INDEXES.includes(0)})" />
+          <img id="mainViewerImg" src="${currentEnsaioPhotos[0]}" class="${firstRot}" alt="Foto do Ensaio" fetchpriority="high" onclick="openLightbox(this.src, '${firstRot}')" />
           <button class="photo-nav-btn photo-btn-next" onclick="navigatePhoto(1)">›</button>
           <div class="photo-counter-badge" id="photoCounter">1 / ${currentEnsaioPhotos.length}</div>
         </div>
@@ -1731,6 +1744,17 @@
           ${thumbHtml}
         </div>
       </div>`;
+
+    prefetchNearbyPhotos(0);
+  }
+
+  // Pré-carrega as imagens vizinhas discretamente para troca instantânea
+  function prefetchNearbyPhotos(idx) {
+    if (!currentEnsaioPhotos || currentEnsaioPhotos.length <= 1) return;
+    const nextIdx = (idx + 1) % currentEnsaioPhotos.length;
+    const prevIdx = (idx - 1 + currentEnsaioPhotos.length) % currentEnsaioPhotos.length;
+    new Image().src = currentEnsaioPhotos[nextIdx];
+    new Image().src = currentEnsaioPhotos[prevIdx];
   }
 
   function navigatePhoto(direction) {
@@ -1747,16 +1771,12 @@
   function updateViewerUI() {
     const mainImg = document.getElementById("mainViewerImg");
     const counter = document.getElementById("photoCounter");
-    const isRotated = ROTATED_PHOTOS_INDEXES.includes(currentPhotoIndex);
+    const rotClass = getPhotoRotationClass(currentPhotoIndex);
 
     if (mainImg) {
       mainImg.src = currentEnsaioPhotos[currentPhotoIndex];
-      if (isRotated) {
-        mainImg.classList.add("photo-rotated");
-      } else {
-        mainImg.classList.remove("photo-rotated");
-      }
-      mainImg.onclick = () => openLightbox(mainImg.src, isRotated);
+      mainImg.className = rotClass;
+      mainImg.onclick = () => openLightbox(mainImg.src, rotClass);
     }
     if (counter) {
       counter.textContent = (currentPhotoIndex + 1) + " / " + currentEnsaioPhotos.length;
@@ -1769,17 +1789,15 @@
         t.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
       }
     });
+
+    prefetchNearbyPhotos(currentPhotoIndex);
   }
 
-  function openLightbox(src, isRotated){
+  function openLightbox(src, rotClass){
     const lb = document.getElementById("photoLightbox");
     const img = document.getElementById("lightboxImg");
     img.src = src;
-    if (isRotated) {
-      img.classList.add("photo-rotated");
-    } else {
-      img.classList.remove("photo-rotated");
-    }
+    img.className = rotClass || '';
     lb.classList.add("show");
   }
   function closeLightbox(){
@@ -1898,6 +1916,7 @@
         const img = document.createElement('img');
         img.src = src;
         img.className = 'ghost-villain';
+        img.onerror = function(){ if(!this.dataset.tried){ this.dataset.tried='1'; this.src='copiao.jpg'; } };
         placeGhostInSector(img, idx);
         
         img.addEventListener('mouseenter', function() {
