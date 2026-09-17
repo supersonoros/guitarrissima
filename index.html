@@ -38,7 +38,7 @@
     z-index:2;
   }
 
-  /* ================= CAMADA DESKTOP LATERAL ================= */
+  /* CAMADA DESKTOP LATERAL */
   .desktop-backdrop-layer {
     display: none;
     position: fixed;
@@ -525,7 +525,7 @@
   .agenda-list li{margin-bottom:4px;}
   .agenda-list li:last-child{margin-bottom:0;}
 
-  /* ================= VISUALIZADOR DE FOTOS (CARROSSEL COM FOTO GRANDE) ================= */
+  /* VISUALIZADOR DE FOTOS (CARROSSEL COM FOTO GRANDE) */
   .photo-viewer-wrap{
     display: flex;
     flex-direction: column;
@@ -553,7 +553,6 @@
     background: #171512;
     display: block;
     cursor: pointer;
-    transition: transform .25s ease;
   }
 
   .photo-nav-btn{
@@ -632,7 +631,6 @@
     height: 100%;
     object-fit: cover;
     display: block;
-    transition: transform .2s ease;
   }
 
   .photo-placeholder-box{
@@ -888,12 +886,9 @@
     max-width:94vw; max-height:86vh; object-fit:contain;
     border:3.5px solid var(--yellow); border-radius:14px;
     box-shadow:0 8px 30px rgba(0,0,0,.8);
-    transition: transform .2s ease;
   }
 
-  /* ========================================================
-     AJUSTE EXCLUSIVO MOBILE: FONTES MAIORES EM CELULARES
-     ======================================================== */
+  /* AJUSTE EXCLUSIVO MOBILE */
   @media (max-width: 600px) {
     body { font-size: 15px; line-height: 1.25; }
     p.lede { font-size: 15px; line-height: 1.25; }
@@ -949,7 +944,7 @@
     <div class="tab" id="tabBtnJogos" onclick="switchTab('jogos')">Joguinhos</div>
   </div>
 
-  <!-- ===================== 1. HISTÓRIA ===================== -->
+  <!-- 1. HISTÓRIA -->
   <div id="view-historia" class="view active">
     
     <div class="story-loose-wrap">
@@ -981,7 +976,7 @@
           <div class="folder-tab" style="border-top:3px solid var(--purple);">Dossiê #01</div>
           <div class="comic-villain-card" style="border-top:4.5px solid var(--purple);">
             <div class="villain-avatar-box">
-              <img src="copiao.png" alt="Copião" class="villain-silhouette" onerror="if(!this.dataset.tried){this.dataset.tried='1';this.src='copiao.jpg';}else if(this.dataset.tried==='1'){this.dataset.tried='2';this.src='vilao1.png';}" />
+              <img src="copiao.png" alt="Copião" class="villain-silhouette" onerror="if(!this.dataset.tried){this.dataset.tried='1';this.src='copiao.jpg';}" />
             </div>
             <div class="villain-body-box">
               <div>
@@ -1104,7 +1099,7 @@
 
   </div>
 
-  <!-- ===================== 2. ENSAIOS ===================== -->
+  <!-- 2. ENSAIOS -->
   <div id="view-ensaios" class="view">
     
     <div id="view-ensaios-home">
@@ -1182,7 +1177,7 @@
     </div>
   </div>
 
-  <!-- ===================== 3. SESSÕES ===================== -->
+  <!-- 3. SESSÕES -->
   <div id="view-sessoes" class="view">
     <div id="view-sessoes-home">
       
@@ -1260,7 +1255,7 @@
     </div>
   </div>
 
-  <!-- ===================== 4. JOGUINHOS ===================== -->
+  <!-- 4. JOGUINHOS -->
   <div id="view-jogos" class="view">
     <div class="panel">
       <div class="section-title">Joguinhos da Jornada</div>
@@ -1329,7 +1324,7 @@
 
 <script>
   /* ========================================================
-     1. DADOS FUNDAMENTAIS COM AS 10 FOTOS REAIS DO ENSAIO 1
+     1. DADOS FUNDAMENTAIS COM AS 10 FOTOS
      ======================================================== */
   const ENSAIOS = [
     { 
@@ -1679,31 +1674,10 @@
   }
 
   /* ========================================================
-     3. VISUALIZADOR DE FOTOS (DIRETO PELO NOME DO ARQUIVO)
+     3. VISUALIZADOR DE FOTOS (100% PURO E DIRETO)
      ======================================================== */
   let currentEnsaioPhotos = [];
   let currentPhotoIndex = 0;
-
-  // ROTAÇÃO EXATA BASEADA NO NOME DO ARQUIVO:
-  // ensaio1-foto4.png -> 180° (estava de ponta-cabeça nos prints)
-  // ensaio1-foto6.png -> 180° (estava de ponta-cabeça nos prints)
-  // ensaio1-foto7.png -> -90° (girar para a esquerda)
-  // Qualquer outro arquivo -> 0°
-  function getPhotoStyleByName(src) {
-    if (!src) return "transform: none;";
-    if (src.includes("ensaio1-foto4")) return "transform: rotate(180deg);";
-    if (src.includes("ensaio1-foto6")) return "transform: rotate(180deg);";
-    if (src.includes("ensaio1-foto7")) return "transform: rotate(-90deg) scale(0.72);";
-    return "transform: none;";
-  }
-
-  function getThumbStyleByName(src) {
-    if (!src) return "transform: none;";
-    if (src.includes("ensaio1-foto4")) return "transform: rotate(180deg);";
-    if (src.includes("ensaio1-foto6")) return "transform: rotate(180deg);";
-    if (src.includes("ensaio1-foto7")) return "transform: rotate(-90deg) scale(1.35);";
-    return "transform: none;";
-  }
 
   function renderPhotoViewer(photos) {
     currentEnsaioPhotos = (photos && photos.length > 0) ? photos : [];
@@ -1722,20 +1696,17 @@
 
     let thumbHtml = '';
     for (let i = 0; i < currentEnsaioPhotos.length; i++) {
-      const src = currentEnsaioPhotos[i];
       thumbHtml += `
         <div class="photo-thumb-item ${i === 0 ? 'active' : ''}" onclick="selectPhoto(${i})">
-          <img src="${src}" style="${getThumbStyleByName(src)}" alt="Miniatura ${i + 1}" loading="lazy" decoding="async" />
+          <img src="${currentEnsaioPhotos[i]}" alt="Miniatura ${i + 1}" loading="lazy" decoding="async" />
         </div>`;
     }
-
-    const firstSrc = currentEnsaioPhotos[0];
 
     container.innerHTML = `
       <div class="photo-viewer-wrap">
         <div class="photo-main-frame">
           <button class="photo-nav-btn photo-btn-prev" onclick="navigatePhoto(-1)">‹</button>
-          <img id="mainViewerImg" src="${firstSrc}" style="${getPhotoStyleByName(firstSrc)}" alt="Foto do Ensaio" fetchpriority="high" onclick="openLightbox(this.src)" />
+          <img id="mainViewerImg" src="${currentEnsaioPhotos[0]}" alt="Foto do Ensaio" fetchpriority="high" onclick="openLightbox(this.src)" />
           <button class="photo-nav-btn photo-btn-next" onclick="navigatePhoto(1)">›</button>
           <div class="photo-counter-badge" id="photoCounter">1 / ${currentEnsaioPhotos.length}</div>
         </div>
@@ -1769,11 +1740,9 @@
   function updateViewerUI() {
     const mainImg = document.getElementById("mainViewerImg");
     const counter = document.getElementById("photoCounter");
-    const currentSrc = currentEnsaioPhotos[currentPhotoIndex];
 
     if (mainImg) {
-      mainImg.src = currentSrc;
-      mainImg.style.cssText = getPhotoStyleByName(currentSrc);
+      mainImg.src = currentEnsaioPhotos[currentPhotoIndex];
       mainImg.onclick = () => openLightbox(mainImg.src);
     }
     if (counter) {
@@ -1795,7 +1764,6 @@
     const lb = document.getElementById("photoLightbox");
     const img = document.getElementById("lightboxImg");
     img.src = src;
-    img.style.cssText = getPhotoStyleByName(src);
     lb.classList.add("show");
   }
   function closeLightbox(){
@@ -2090,9 +2058,7 @@
     }
   });
 
-  /* ========================================================
-     5. JOGUINHOS
-     ======================================================== */
+  /* 5. JOGUINHOS */
   const GAMES = {
     quiz: `<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
