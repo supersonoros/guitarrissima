@@ -16,13 +16,18 @@
     --whatsapp:#25D366;
   }
   *{box-sizing:border-box;}
-  html,body{margin:0;padding:0;overflow-x:hidden;}
+  html,body{
+    margin:0;padding:0;
+    overflow-x:hidden;
+    width:100%;
+    max-width:100vw;
+  }
   body{
     font-family:'Comic Neue', cursive, sans-serif;
     font-weight:700;
-    line-height:1.15;
+    line-height:1.2;
     background:var(--red); color:var(--ink); min-height:100vh; min-height:100dvh;
-    display:flex; justify-content:center; padding:24px 12px calc(60px + env(safe-area-inset-bottom));
+    display:flex; justify-content:center; padding:16px 8px calc(60px + env(safe-area-inset-bottom));
     transition:background .4s ease;
   }
   body::before{
@@ -36,9 +41,10 @@
     max-width:1180px;
     position:relative;
     z-index:2;
+    overflow-x:hidden;
   }
 
-  /* CAMADA DESKTOP LATERAL */
+  /* ================= CAMADA DESKTOP LATERAL ================= */
   .desktop-backdrop-layer {
     display: none;
     position: fixed;
@@ -130,72 +136,81 @@
 
   .brand-banner-single{
     display:flex; align-items:center; justify-content:center;
-    margin-bottom:18px; padding:4px 0;
+    margin-bottom:14px; padding:2px 0;
   }
   .logo-super{
-    height:clamp(85px, 16vw, 170px);
-    width:auto; max-width:92%; object-fit:contain;
-    filter:drop-shadow(4px 4px 0 var(--ink));
+    height:clamp(80px, 15vw, 170px);
+    width:auto; max-width:94%; object-fit:contain;
+    filter:drop-shadow(3px 3px 0 var(--ink));
     transition:transform .2s ease;
   }
 
-  .header-intro{text-align:center; margin-bottom:20px;}
+  .header-intro{text-align:center; margin-bottom:16px; padding:0 4px;}
   .eyebrow{
-    display:inline-block; font-family:'Bangers', Impact, sans-serif; font-size:clamp(12px, 3.2vw, 16px); letter-spacing:1px;
-    text-transform:uppercase; background:var(--ink); color:var(--yellow); padding:5px 16px;
-    border-radius:999px; margin-bottom:10px; text-shadow:1px 1px 0 rgba(0,0,0,0.4);
+    display:inline-block; font-family:'Bangers', cursive; font-size:clamp(12px, 3.2vw, 16px); letter-spacing:1px;
+    text-transform:uppercase; background:var(--ink); color:var(--yellow); padding:5px 14px;
+    border-radius:999px; margin-bottom:8px; text-shadow:1px 1px 0 rgba(0,0,0,0.4);
   }
   h1{
-    font-family:'Bangers', Impact, sans-serif; font-size:clamp(24px, 6.5vw, 40px); letter-spacing:1.5px;
+    font-family:'Bangers', cursive; font-size:clamp(22px, 6vw, 40px); letter-spacing:1.2px;
     text-transform:uppercase; line-height:1.05; color:var(--yellow);
-    -webkit-text-stroke:1.2px var(--ink); text-shadow:2.5px 2.5px 0 var(--ink);
+    -webkit-text-stroke:1px var(--ink); text-shadow:2px 2px 0 var(--ink);
     margin:0 0 8px; text-align:center;
+    word-break:break-word;
   }
   p.lede{
-    color:rgba(255,255,255,.96); font-size:clamp(13px, 3.3vw, 16.5px); line-height:1.18;
+    color:rgba(255,255,255,.96); font-size:clamp(13px, 3.2vw, 16.5px); line-height:1.2;
     margin:0 auto; max-width:760px; text-align:center;
+    word-break:break-word;
   }
 
   .panel{
-    background:var(--cream); border:3.5px solid var(--ink); border-radius:18px;
-    box-shadow:5px 5px 0 var(--ink); padding:clamp(14px, 3vw, 28px); margin-bottom:18px;
+    background:var(--cream); border:3px solid var(--ink); border-radius:16px;
+    box-shadow:4px 4px 0 var(--ink); padding:14px 12px; margin-bottom:14px;
+    width:100%; max-width:100%; overflow:hidden;
+  }
+  @media(min-width:600px){
+    body{padding:24px 12px calc(60px + env(safe-area-inset-bottom));}
+    .panel{border:3.5px solid var(--ink); border-radius:18px; box-shadow:5px 5px 0 var(--ink); padding:20px; margin-bottom:18px;}
   }
 
   .tabs{
-    display:flex; gap:6px; margin:0 auto 18px;
+    display:flex; gap:5px; margin:0 auto 16px;
     max-width:720px; width:100%;
     flex-wrap:nowrap;
   }
   .tab{
-    flex:1; text-align:center; font-family:'Bangers', Impact, sans-serif; font-size:clamp(13px, 3.2vw, 19px); letter-spacing:.6px;
+    flex:1; text-align:center; font-family:'Bangers', cursive; font-size:clamp(12px, 3.2vw, 19px); letter-spacing:.6px;
     text-transform:uppercase; background:#fff; border:2.5px solid var(--ink); border-radius:10px;
-    padding:9px 2px; cursor:pointer; box-shadow:2.5px 2.5px 0 var(--ink);
+    padding:8px 2px; cursor:pointer; box-shadow:2px 2px 0 var(--ink);
     transition:transform .12s ease, box-shadow .12s ease;
     white-space:nowrap;
   }
   .tab.active{background:var(--yellow);}
   .tab:active{transform:translate(2px,2px); box-shadow:1px 1px 0 var(--ink);}
 
-  .view{display:none;}
+  .view{display:none; width:100%; max-width:100%;}
   .view.active{display:block;}
 
   .story-loose-wrap{
-    display:flex; flex-direction:column; gap:18px; margin-bottom:20px;
+    display:flex; flex-direction:column; gap:16px; margin-bottom:20px;
+    width:100%; max-width:100%;
   }
 
   .comic-prologue-card{
-    background:#fff; border:3.5px solid var(--ink); border-radius:18px; padding:18px;
-    box-shadow:5px 5px 0 var(--ink); position:relative;
-    display:flex; flex-direction:column; gap:14px; align-items:center;
+    background:#fff; border:3px solid var(--ink); border-radius:16px; padding:14px;
+    box-shadow:4px 4px 0 var(--ink); position:relative;
+    display:flex; flex-direction:column; gap:12px; align-items:center;
+    width:100%; max-width:100%;
   }
   @media(min-width:720px){
     .comic-prologue-card{
-      flex-direction:row; padding:24px; gap:24px;
+      flex-direction:row; padding:22px; gap:20px; border-width:3.5px; border-radius:18px; box-shadow:5px 5px 0 var(--ink);
     }
   }
 
   .prologue-img-wrap{
-    width:clamp(90px, 22vw, 130px); height:clamp(90px, 22vw, 130px);
+    width:clamp(85px, 20vw, 130px); height:clamp(85px, 20vw, 130px);
     flex-shrink:0; display:flex; align-items:center; justify-content:center;
     background:transparent; border:none; box-shadow:none; padding:0;
   }
@@ -204,8 +219,8 @@
     filter:drop-shadow(3px 3px 0 rgba(0,0,0,0.18));
   }
   .comic-tag{
-    position:absolute; top:-12px; left:14px; background:var(--ink); color:var(--yellow);
-    font-family:'Bangers', Impact, sans-serif; font-size:12px; letter-spacing:1px; padding:3px 12px;
+    position:absolute; top:-12px; left:12px; background:var(--ink); color:var(--yellow);
+    font-family:'Bangers', cursive; font-size:11.5px; letter-spacing:1px; padding:3px 10px;
     border-radius:6px; text-transform:uppercase;
   }
 
@@ -213,19 +228,19 @@
     text-align:center; margin:8px 0 6px;
   }
   .comic-badge-act{
-    display:inline-block; font-family:'Bangers', Impact, sans-serif; font-size:15px; letter-spacing:1px;
+    display:inline-block; font-family:'Bangers', cursive; font-size:15px; letter-spacing:1px;
     text-transform:uppercase; background:var(--yellow); color:var(--ink); border:2.5px solid var(--ink);
     padding:4px 16px; border-radius:999px; box-shadow:3px 3px 0 var(--ink); margin-bottom:4px;
   }
 
   .comic-villain-strip{
-    display:grid; grid-template-columns:1fr; gap:16px;
-    align-items:stretch;
+    display:grid; grid-template-columns:1fr; gap:14px;
+    align-items:stretch; width:100%; max-width:100%;
   }
   @media(min-width:720px){
     .comic-villain-strip{
       grid-template-columns:repeat(2, 1fr);
-      gap:22px;
+      gap:20px;
     }
   }
   
@@ -237,12 +252,14 @@
     display:flex;
     flex-direction:column;
     height:100%;
+    width:100%;
+    max-width:100%;
   }
   .folder-card-wrap:hover{
     transform:translate(-2px, -2px);
   }
   .folder-card-wrap:hover .comic-villain-card{
-    box-shadow:6px 6px 0 var(--ink);
+    box-shadow:5px 5px 0 var(--ink);
   }
   .folder-card-wrap:active{
     transform:translate(2px, 2px);
@@ -251,14 +268,14 @@
   .folder-tab{
     position:absolute;
     top:0;
-    left:14px;
+    left:12px;
     height:18px;
-    padding:2px 12px 0;
+    padding:2px 10px 0;
     background:#fff;
     border:2.5px solid var(--ink);
     border-bottom:none;
     border-radius:8px 8px 0 0;
-    font-family:'Bangers', Impact, sans-serif;
+    font-family:'Bangers', cursive;
     font-size:11px;
     letter-spacing:1px;
     text-transform:uppercase;
@@ -267,21 +284,24 @@
   }
 
   .comic-villain-card{
-    background:#fff; border:3.5px solid var(--ink); border-radius:0 18px 18px 18px; padding:14px;
-    box-shadow:4px 4px 0 var(--ink); display:flex; gap:14px; align-items:stretch;
+    background:#fff; border:3px solid var(--ink); border-radius:0 16px 16px 16px; padding:12px;
+    box-shadow:3.5px 3.5px 0 var(--ink); display:flex; gap:10px; align-items:stretch;
     position:relative; z-index:1;
     flex:1;
     height:100%;
+    width:100%;
+    max-width:100%;
+    overflow:hidden;
     transition:box-shadow .12s ease;
   }
   
   .villain-avatar-box{
-    width:80px; height:auto; min-height:110px; background:transparent; border:none; border-radius:0;
+    width:75px; height:auto; min-height:105px; background:transparent; border:none; border-radius:0;
     display:flex; align-items:center; justify-content:center; flex-shrink:0; padding:0;
     box-shadow:none;
   }
   @media(min-width:400px){
-    .villain-avatar-box{width:95px;}
+    .villain-avatar-box{width:88px;}
   }
   .villain-silhouette{
     width:100%; height:100%; max-height:115px; object-fit:contain;
@@ -294,42 +314,47 @@
     flex-direction:column;
     justify-content:space-between;
     min-width:0;
+    word-break:break-word;
   }
   .villain-summary-txt{
-    font-size:12.5px; color:#333; line-height:1.18;
-    min-height:36px;
+    font-size:13px; color:#333; line-height:1.2;
+    min-height:34px;
     word-break:break-word;
   }
   .villain-comic-phrase{
     font-family:'Comic Neue', cursive; font-style:italic; font-size:12px; color:#222;
-    background:#FBF6EA; border-left:3.5px solid var(--ink); padding:6px 10px; border-radius:4px;
-    margin:6px 0 0; line-height:1.18;
-    min-height:46px;
+    background:#FBF6EA; border-left:3.5px solid var(--ink); padding:6px 8px; border-radius:4px;
+    margin:6px 0 0; line-height:1.2;
+    min-height:44px;
     display:flex;
     align-items:center;
+    word-break:break-word;
   }
   .click-hint{
-    display:inline-flex; align-items:center; gap:5px; font-family:'Bangers', Impact, sans-serif; font-size:11.5px;
-    letter-spacing:0.8px; text-transform:uppercase; color:var(--red); margin-top:6px;
+    display:inline-flex; align-items:center; gap:4px; font-family:'Bangers', cursive; font-size:11px;
+    letter-spacing:0.8px; text-transform:uppercase; color:var(--red); margin-top:5px;
   }
   .icon-lupa{
-    width:13px; height:13px; object-fit:contain; display:inline-block; vertical-align:middle;
+    width:12px; height:12px; object-fit:contain; display:inline-block; vertical-align:middle;
   }
 
   .notice-box{
-    background:#FFF9E6; border:3px solid var(--ink); border-radius:16px;
-    padding:14px 16px; margin-bottom:18px; font-size:13.5px; line-height:1.2;
+    background:#FFF9E6; border:3px solid var(--ink); border-radius:14px;
+    padding:12px; margin-bottom:14px; font-size:13px; line-height:1.2;
     display:flex; flex-direction:column; gap:10px;
+    width:100%; max-width:100%;
+    word-break:break-word;
   }
   @media (min-width: 720px) {
     .notice-box{
       flex-direction:row; align-items:center; justify-content:space-between;
+      padding:14px 16px; border-radius:16px;
     }
   }
   .btn-whats{
     display:inline-flex; align-items:center; justify-content:center; gap:8px; background:var(--whatsapp); color:#fff;
-    font-family:'Bangers', Impact, sans-serif; font-size:15px; letter-spacing:1px; text-transform:uppercase;
-    padding:9px 16px; border-radius:10px; border:2.5px solid var(--ink); text-decoration:none;
+    font-family:'Bangers', cursive; font-size:15px; letter-spacing:1px; text-transform:uppercase;
+    padding:9px 14px; border-radius:10px; border:2.5px solid var(--ink); text-decoration:none;
     box-shadow:3px 3px 0 var(--ink); text-shadow:1px 1px 0 rgba(0,0,0,0.4); flex-shrink:0;
     width:100%;
   }
@@ -341,66 +366,75 @@
   }
 
   .ensaios-manifesto-box{
-    background:#FFF9E6; border:3px solid var(--ink); border-radius:16px;
-    padding:14px 16px; margin-bottom:18px; font-size:13.5px; line-height:1.2;
-    box-shadow:3.5px 3.5px 0 var(--ink);
+    background:#FFF9E6; border:3px solid var(--ink); border-radius:14px;
+    padding:12px; margin-bottom:14px; font-size:13px; line-height:1.2;
+    box-shadow:3px 3px 0 var(--ink); width:100%; max-width:100%;
+    word-break:break-word;
   }
   .album-callout{
     background:var(--cream); border-left:4px solid var(--red);
-    padding:8px 12px; border-radius:6px; margin-top:8px; font-size:13px; line-height:1.2;
+    padding:7px 10px; border-radius:6px; margin-top:8px; font-size:12.5px; line-height:1.2;
+    word-break:break-word;
   }
 
   .grid-2-even{
     display:grid;
     grid-template-columns:1fr;
-    gap:14px;
+    gap:12px;
+    width:100%;
+    max-width:100%;
   }
   @media (min-width: 720px) {
     .grid-2-even{
       grid-template-columns:repeat(2, 1fr);
-      gap:18px;
+      gap:16px;
     }
   }
 
   .grid-3-games{
     display:grid;
     grid-template-columns:1fr;
-    gap:12px;
+    gap:10px;
+    width:100%;
+    max-width:100%;
   }
   @media (min-width: 768px) {
     .grid-3-games{
       grid-template-columns:repeat(3, 1fr);
-      gap:18px;
+      gap:16px;
     }
     .grid-3-games .item-card{
-      flex-direction:column; text-align:center; padding:26px 18px;
+      flex-direction:column; text-align:center; padding:22px 14px;
     }
     .grid-3-games .item-card .arrow{display:none;}
-    .grid-3-games .item-dot{margin-bottom:8px; width:54px; height:54px; font-size:22px;}
+    .grid-3-games .item-dot{margin-bottom:8px; width:52px; height:52px; font-size:22px;}
   }
 
   .grid-detail-cols{
     display:grid;
     grid-template-columns:1fr;
-    gap:16px;
+    gap:14px;
     align-items:start;
+    width:100%;
+    max-width:100%;
   }
   @media (min-width: 840px) {
     .grid-detail-cols{
       grid-template-columns:1.15fr 0.85fr;
-      gap:22px;
+      gap:20px;
     }
   }
 
   .item-card{
-    display:flex; align-items:center; gap:12px; background:#fff;
-    border:3px solid var(--ink); border-radius:14px; padding:14px;
-    cursor:pointer; box-shadow:3.5px 3.5px 0 var(--ink);
+    display:flex; align-items:center; gap:10px; background:#fff;
+    border:2.5px solid var(--ink); border-radius:12px; padding:12px;
+    cursor:pointer; box-shadow:3px 3px 0 var(--ink);
     transition:transform .12s ease, box-shadow .12s ease;
+    width:100%; max-width:100%;
   }
   .item-card:hover{
     transform:translate(-2px, -2px);
-    box-shadow:6px 6px 0 var(--ink);
+    box-shadow:5px 5px 0 var(--ink);
   }
   .item-card:active{
     transform:translate(2px,2px);
@@ -408,21 +442,23 @@
   }
   
   .item-dot{
-    width:44px; height:44px; border-radius:50%; flex-shrink:0; display:flex;
+    width:40px; height:40px; border-radius:50%; flex-shrink:0; display:flex;
     align-items:center; justify-content:center;
-    color:#fff; font-family:'Bangers', Impact, sans-serif; font-size:19px; letter-spacing:.5px;
-    border:2.5px solid var(--ink); text-shadow:1.5px 1.5px 0 var(--ink);
+    color:#fff; font-family:'Bangers', cursive; font-size:18px; letter-spacing:.5px;
+    border:2px solid var(--ink); text-shadow:1.5px 1.5px 0 var(--ink);
   }
-  .item-info{flex:1; min-width:0;}
-  .item-name{font-family:'Bangers', Impact, sans-serif; font-size:18px; letter-spacing:.6px; text-transform:uppercase; margin:0 0 2px; line-height:1.05;}
-  .item-meta{font-size:12.5px; color:#555; line-height:1.18; word-break:break-word;}
-  .arrow{font-size:20px; font-weight:bold; color:var(--ink); transition:transform .12s ease; flex-shrink:0;}
+  .item-info{flex:1; min-width:0; word-break:break-word;}
+  .item-name{font-family:'Bangers', cursive; font-size:17px; letter-spacing:.6px; text-transform:uppercase; margin:0 0 2px; line-height:1.05;}
+  .item-meta{font-size:12px; color:#555; line-height:1.2; word-break:break-word;}
+  .arrow{font-size:18px; font-weight:bold; color:var(--ink); transition:transform .12s ease; flex-shrink:0;}
   .item-card:hover .arrow{transform:translateX(3px);}
 
   .ens-header-card {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 8px;
+    width:100%;
+    max-width:100%;
   }
   @media (min-width: 720px) {
     .ens-header-card {
@@ -433,25 +469,26 @@
   }
   .ens-info-callout {
     background: #FFF9E6;
-    border: 2.5px solid var(--ink);
-    border-left: 6px solid var(--yellow);
-    border-radius: 12px;
-    padding: 8px 12px;
-    box-shadow: 3px 3px 0 var(--ink);
-    font-size: 13px;
-    line-height: 1.18;
+    border: 2px solid var(--ink);
+    border-left: 5px solid var(--yellow);
+    border-radius: 10px;
+    padding: 7px 10px;
+    box-shadow: 2.5px 2.5px 0 var(--ink);
+    font-size: 12.5px;
+    line-height: 1.2;
     color: var(--ink);
-    max-width: 380px;
+    max-width: 100%;
+    word-break:break-word;
   }
 
   .silhouette-card{
-    display:flex; gap:14px; align-items:center;
+    display:flex; gap:10px; align-items:center;
     background: #FFF9E6; color: var(--ink);
-    border-radius:14px; padding:12px 14px; border:3px solid var(--ink); box-shadow:3.5px 3.5px 0 var(--ink);
-    margin-bottom:16px;
+    border-radius:12px; padding:10px; border:2.5px solid var(--ink); box-shadow:3px 3px 0 var(--ink);
+    margin-bottom:12px; width:100%; max-width:100%;
   }
   .silhouette-avatar{
-    width:68px; height:85px; background:transparent; border-radius:0; display:flex; align-items:center; justify-content:center;
+    width:62px; height:78px; background:transparent; border-radius:0; display:flex; align-items:center; justify-content:center;
     border:none; flex-shrink:0; padding:0;
   }
   .silhouette-img{
@@ -460,9 +497,9 @@
   }
 
   .btn{
-    display:flex; align-items:center; justify-content:center; gap:8px; width:100%; border:3px solid var(--ink); border-radius:12px;
-    background:var(--yellow); color:var(--ink); font-family:'Bangers', Impact, sans-serif; font-size:16px; letter-spacing:1px;
-    text-transform:uppercase; padding:10px 14px; cursor:pointer; box-shadow:3.5px 3.5px 0 var(--ink); text-decoration:none;
+    display:flex; align-items:center; justify-content:center; gap:8px; width:100%; border:2.5px solid var(--ink); border-radius:10px;
+    background:var(--yellow); color:var(--ink); font-family:'Bangers', cursive; font-size:15px; letter-spacing:1px;
+    text-transform:uppercase; padding:9px 12px; cursor:pointer; box-shadow:3px 3px 0 var(--ink); text-decoration:none;
     text-align:center;
   }
   .btn:active{transform:translate(2px,2px); box-shadow:1.5px 1.5px 0 var(--ink);}
@@ -470,78 +507,87 @@
 
   .back-btn{
     display:inline-flex; align-items:center; gap:6px; background:var(--ink); color:#fff;
-    font-family:'Bangers', Impact, sans-serif; font-size:14px; letter-spacing:1px; text-transform:uppercase;
-    border:none; border-radius:999px; padding:6px 14px; margin-bottom:12px; cursor:pointer;
+    font-family:'Bangers', cursive; font-size:13.5px; letter-spacing:1px; text-transform:uppercase;
+    border:none; border-radius:999px; padding:6px 14px; margin-bottom:10px; cursor:pointer;
   }
 
   .section-title{
-    font-family:'Bangers', Impact, sans-serif; font-size:18px; letter-spacing:1.2px;
-    text-transform:uppercase; color:var(--red); margin:0 0 12px;
+    font-family:'Bangers', cursive; font-size:18px; letter-spacing:1px;
+    text-transform:uppercase; color:var(--red); margin:0 0 10px;
     text-shadow:1px 1px 0 rgba(0,0,0,0.1);
+    word-break:break-word;
   }
 
   .lineup-row{
-    display:flex; align-items:center; gap:10px; padding:7px 0; border-bottom:2px dashed #e6e0d2; font-size:13.5px;
+    display:flex; align-items:center; gap:8px; padding:6px 0; border-bottom:2px dashed #e6e0d2; font-size:13px;
   }
   .lineup-row:last-child{border-bottom:none;}
   .lineup-order{
-    font-family:'Bangers', Impact, sans-serif;
+    font-family:'Bangers', cursive;
     background:var(--blue);
     color:#fff;
     border:2px solid var(--ink);
     border-radius:999px;
     padding:2px 6px;
-    font-size:14px;
-    box-shadow:2px 2px 0 var(--ink);
+    font-size:13px;
+    box-shadow:1.5px 1.5px 0 var(--ink);
     flex-shrink:0;
-    width:34px;
+    width:32px;
     height:22px;
     display:inline-flex;
     align-items:center;
     justify-content:center;
   }
-  .lineup-name{flex:1; font-weight:700;}
+  .lineup-name{flex:1; font-weight:700; word-break:break-word;}
 
-  .info-item{display:block; margin-bottom:10px; font-size:13.5px; line-height:1.2;}
+  .info-item{display:block; margin-bottom:8px; font-size:13px; line-height:1.2; word-break:break-word;}
   .info-item:last-child{margin-bottom:0;}
 
-  .recap-box{background:#F4EFE1; border-left:4px solid var(--ink); border-radius:8px; padding:14px; font-size:13px; line-height:1.22; color:#333;}
-  .chip-list{display:flex; flex-wrap:wrap; gap:6px; margin-top:10px;}
+  .recap-box{background:#F4EFE1; border-left:4px solid var(--ink); border-radius:8px; padding:12px; font-size:13px; line-height:1.22; color:#333; word-break:break-word;}
+  .chip-list{display:flex; flex-wrap:wrap; gap:6px; margin-top:8px;}
   .power-chip{
-    font-family:'Bangers', Impact, sans-serif; font-size:13.5px; letter-spacing:.5px; text-transform:uppercase;
-    color:#fff; padding:4px 12px; border-radius:999px; border:2px solid var(--ink);
+    font-family:'Bangers', cursive; font-size:13px; letter-spacing:.5px; text-transform:uppercase;
+    color:#fff; padding:3px 10px; border-radius:999px; border:2px solid var(--ink);
     text-shadow:1px 1px 0 rgba(0,0,0,0.35);
   }
 
+  /* CARTÕES PEDAGÓGICOS RESPONSIVOS (SEM ESTOURO) */
   .ens-mission-card{
-    background:#FFF9E6; border:2.5px solid var(--ink); border-radius:12px;
-    padding:10px 12px; margin-bottom:10px;
+    background:#FFF9E6; border:2.5px solid var(--ink); border-radius:10px;
+    padding:9px 10px; margin-bottom:8px; width:100%; max-width:100%;
+    word-break:break-word;
   }
   .ens-narrative-card{
     background:#fff; border-left:4px solid var(--ink); border-radius:6px;
-    padding:8px 10px; font-size:13px; line-height:1.18; color:#222; margin-bottom:10px;
+    padding:8px 10px; font-size:13px; line-height:1.22; color:#222; margin-bottom:8px;
+    width:100%; max-width:100%; word-break:break-word;
   }
-  .agenda-list{margin:0; padding-left:18px; font-size:13px; line-height:1.25; color:#333;}
-  .agenda-list li{margin-bottom:4px;}
+  .agenda-list{
+    margin:0; padding-left:16px; font-size:13px; line-height:1.25; color:#333;
+    width:100%; max-width:100%; word-break:break-word;
+  }
+  .agenda-list li{margin-bottom:5px;}
   .agenda-list li:last-child{margin-bottom:0;}
 
   /* VISUALIZADOR DE FOTOS (CARROSSEL COM FOTO GRANDE) */
   .photo-viewer-wrap{
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    margin-top: 10px;
+    gap: 8px;
+    margin-top: 6px;
+    width:100%;
+    max-width:100%;
   }
   .photo-main-frame{
     position: relative;
     width: 100%;
     aspect-ratio: 4/3;
-    max-height: 420px;
+    max-height: 400px;
     background: #171512;
-    border: 3.5px solid var(--ink);
-    border-radius: 14px;
+    border: 3px solid var(--ink);
+    border-radius: 12px;
     overflow: hidden;
-    box-shadow: 4px 4px 0 var(--ink);
+    box-shadow: 3.5px 3.5px 0 var(--ink);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -553,6 +599,7 @@
     background: #171512;
     display: block;
     cursor: pointer;
+    transition: transform .25s ease;
   }
 
   .photo-nav-btn{
@@ -561,17 +608,17 @@
     transform: translateY(-50%);
     background: var(--yellow);
     color: var(--ink);
-    border: 2.5px solid var(--ink);
+    border: 2px solid var(--ink);
     border-radius: 50%;
-    width: 38px;
-    height: 38px;
-    font-size: 22px;
+    width: 36px;
+    height: 36px;
+    font-size: 20px;
     font-weight: 900;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    box-shadow: 2.5px 2.5px 0 var(--ink);
+    box-shadow: 2px 2px 0 var(--ink);
     z-index: 5;
     user-select: none;
     transition: transform .1s ease, box-shadow .1s ease;
@@ -580,34 +627,36 @@
     transform: translateY(-50%) translate(2px, 2px);
     box-shadow: none;
   }
-  .photo-btn-prev{ left: 10px; }
-  .photo-btn-next{ right: 10px; }
+  .photo-btn-prev{ left: 8px; }
+  .photo-btn-next{ right: 8px; }
 
   .photo-counter-badge{
     position: absolute;
     bottom: 8px;
-    right: 10px;
+    right: 8px;
     background: rgba(23, 21, 18, 0.85);
     color: var(--yellow);
     border: 1.5px solid var(--yellow);
     border-radius: 999px;
-    padding: 2px 10px;
+    padding: 2px 9px;
     font-family: 'Bangers', cursive;
-    font-size: 13px;
+    font-size: 12px;
     letter-spacing: 1px;
     z-index: 5;
   }
 
   .photo-thumb-strip{
     display: flex;
-    gap: 8px;
+    gap: 6px;
     overflow-x: auto;
-    padding: 4px 2px 8px;
+    padding: 4px 2px 6px;
     -webkit-overflow-scrolling: touch;
+    width:100%;
+    max-width:100%;
   }
   .photo-thumb-item{
-    width: 60px;
-    height: 60px;
+    width: 56px;
+    height: 56px;
     flex-shrink: 0;
     border-radius: 8px;
     border: 2px solid var(--ink);
@@ -622,29 +671,30 @@
   }
   .photo-thumb-item.active{
     opacity: 1;
-    border: 3px solid var(--yellow);
+    border: 2.5px solid var(--yellow);
     box-shadow: 2px 2px 0 var(--ink);
-    transform: scale(1.05);
+    transform: scale(1.04);
   }
   .photo-thumb-item img{
     width: 100%;
     height: 100%;
     object-fit: cover;
     display: block;
+    transition: transform .2s ease;
   }
 
   .photo-placeholder-box{
     width: 100%;
-    padding: 30px 16px;
+    padding: 26px 14px;
     background: #EFE9D8;
     border: 2px dashed #c9c0a8;
-    border-radius: 12px;
+    border-radius: 10px;
     text-align: center;
     color: #9b927a;
   }
   .photo-placeholder-box span{
     font-family: 'Bangers', cursive;
-    font-size: 14px;
+    font-size: 13.5px;
     letter-spacing: 1px;
     display: block;
     margin-top: 4px;
@@ -655,11 +705,11 @@
     flex-direction: column;
     align-items: center;
     gap: 6px;
-    margin-top: 28px;
+    margin-top: 24px;
   }
   .footer-label {
-    font-family: 'Bangers', Impact, sans-serif;
-    font-size: 14px;
+    font-family: 'Bangers', cursive;
+    font-size: 13.5px;
     letter-spacing: 1.2px;
     text-transform: uppercase;
     color: #fff;
@@ -667,21 +717,21 @@
   }
   .footer-logo-card {
     background: #FFFFFF;
-    border: 3px solid var(--ink);
-    border-radius: 12px;
-    box-shadow: 3px 3px 0 var(--ink);
-    padding: 6px 18px;
+    border: 2.5px solid var(--ink);
+    border-radius: 10px;
+    box-shadow: 2.5px 2.5px 0 var(--ink);
+    padding: 5px 16px;
     display: flex;
     align-items: center;
     justify-content: center;
   }
   .logo-gta-footer {
-    height: 32px;
+    height: 30px;
     width: auto;
     object-fit: contain;
   }
   .footer-sub {
-    font-size: 12px;
+    font-size: 11.5px;
     color: rgba(255,255,255,0.9);
     margin-top: 2px;
     letter-spacing: 0.3px;
@@ -690,7 +740,7 @@
 
   .hidden{display:none !important;}
 
-  /* MODAL */
+  /* MODAIS */
   .modal-overlay{
     position:fixed; inset:0; background:rgba(0,0,0,.82); display:none;
     align-items:center; justify-content:center; z-index:9999;
@@ -699,95 +749,96 @@
   .modal-overlay.show{display:flex;}
   .modal-box{
     width:100%; max-width:410px; height:auto; max-height:90vh;
-    background:transparent; border-radius:20px; position:relative;
+    background:transparent; border-radius:18px; position:relative;
     display:flex; flex-direction:column;
   }
   
   .modal-close{
     position:absolute; top:8px; right:8px; z-index:10002; background:var(--ink); color:#fff;
-    border:2.5px solid #fff; border-radius:50%; width:34px; height:34px; font-size:16px;
+    border:2px solid #fff; border-radius:50%; width:32px; height:32px; font-size:15px;
     cursor:pointer; font-weight:bold; display:flex; align-items:center; justify-content:center;
     box-shadow:0 3px 6px rgba(0,0,0,0.5);
     outline:none;
   }
   .modal-close:active{transform:scale(0.95);}
   .modal-box iframe{
-    width:100%; height:100%; border:3.5px solid var(--ink); border-radius:18px;
+    width:100%; height:100%; border:3px solid var(--ink); border-radius:16px;
     background:#111; display:block;
   }
 
   .villain-dossier-modal-box{
     width:100%; max-width:580px; max-height:84vh; max-height:84dvh; overflow-y:auto;
     background:var(--red);
-    border:3.5px solid var(--ink); border-radius:20px;
-    box-shadow:6px 6px 0 var(--ink); padding:16px 12px 14px; position:relative;
+    border:3px solid var(--ink); border-radius:18px;
+    box-shadow:5px 5px 0 var(--ink); padding:14px 10px 12px; position:relative;
     -webkit-overflow-scrolling:touch;
   }
   .villain-dossier-modal-box::before{
     content:"";position:absolute;inset:0;
     background-image:radial-gradient(rgba(255,255,255,.22) 1.6px, transparent 1.6px);
     background-size:16px 16px;pointer-events:none;
-    border-radius:16px;
+    border-radius:14px;
   }
 
   .dossier-paper{
     position:relative; z-index:1; background:#fff;
-    border:3px solid var(--ink); border-radius:14px;
-    padding:16px; box-shadow:4px 4px 0 var(--ink);
+    border:2.5px solid var(--ink); border-radius:12px;
+    padding:14px; box-shadow:3px 3px 0 var(--ink);
+    word-break:break-word;
   }
   .dossier-stamp{
-    display:inline-block; font-family:'Bangers', Impact, sans-serif; font-size:11px; letter-spacing:1px;
-    text-transform:uppercase; color:var(--red); border:2px dashed var(--red); padding:2px 6px;
-    border-radius:4px; margin-bottom:10px; transform:rotate(-1.5deg);
+    display:inline-block; font-family:'Bangers', cursive; font-size:11px; letter-spacing:1px;
+    text-transform:uppercase; color:var(--red); border:1.5px dashed var(--red); padding:2px 6px;
+    border-radius:4px; margin-bottom:8px; transform:rotate(-1.5deg);
   }
 
   .dossier-header{
-    display:flex; gap:14px; align-items:center; margin-bottom:14px;
-    border-bottom:2px dashed #ddd; padding-bottom:12px;
+    display:flex; gap:10px; align-items:center; margin-bottom:12px;
+    border-bottom:2px dashed #ddd; padding-bottom:10px;
   }
 
   .dossier-avatar{
-    width:85px; height:105px; background:transparent; border:none; border-radius:0;
+    width:75px; height:95px; background:transparent; border:none; border-radius:0;
     display:flex; align-items:center; justify-content:center; padding:0; flex-shrink:0;
   }
 
   .boss-mystery-avatar {
-    width: 80px; height: 90px;
+    width: 75px; height: 85px;
     background: #171512;
-    border: 2.5px dashed var(--yellow);
-    border-radius: 12px;
+    border: 2px dashed var(--yellow);
+    border-radius: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
     color: var(--yellow);
     font-family: 'Bangers', cursive;
-    font-size: 44px;
-    box-shadow: 2.5px 2.5px 0 var(--ink);
+    font-size: 38px;
+    box-shadow: 2px 2px 0 var(--ink);
     flex-shrink: 0;
   }
 
   .dossier-section{
-    margin-bottom:12px; font-size:13px; line-height:1.2; color:#000000;
+    margin-bottom:10px; font-size:13px; line-height:1.22; color:#000000;
   }
   .dossier-section-title{
-    font-family:'Bangers', Impact, sans-serif; font-size:15px; letter-spacing:1px;
-    text-transform:uppercase; margin-bottom:3px;
+    font-family:'Bangers', cursive; font-size:15px; letter-spacing:1px;
+    text-transform:uppercase; margin-bottom:2px;
   }
 
   .btn-close-bottom{
-    margin-top:16px;
+    margin-top:14px;
     background:var(--ink);
     color:#fff;
-    border:2.5px solid var(--ink);
-    border-radius:10px;
-    font-family:'Bangers', Impact, sans-serif;
-    font-size:15px;
+    border:2px solid var(--ink);
+    border-radius:8px;
+    font-family:'Bangers', cursive;
+    font-size:14.5px;
     letter-spacing:1px;
     text-transform:uppercase;
-    padding:10px 14px;
+    padding:9px 12px;
     width:100%;
     cursor:pointer;
-    box-shadow:3px 3px 0 rgba(0,0,0,0.25);
+    box-shadow:2.5px 2.5px 0 rgba(0,0,0,0.25);
   }
   .btn-close-bottom:active{transform:translate(2px, 2px); box-shadow:none;}
 
@@ -812,36 +863,36 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 16px;
+    padding: 14px;
     text-align: center;
     z-index: 10;
   }
   .opt4-icon-wrap {
-    width: 54px; height: 54px;
+    width: 48px; height: 48px;
     background: #fff;
-    border: 2.5px solid var(--ink);
+    border: 2px solid var(--ink);
     border-radius: 50%;
     display: flex; align-items: center; justify-content: center;
-    padding: 6px;
-    margin-bottom: 8px;
-    box-shadow: 2.5px 2.5px 0 var(--ink);
+    padding: 5px;
+    margin-bottom: 6px;
+    box-shadow: 2px 2px 0 var(--ink);
   }
   .opt4-icon-wrap img {
     width: 100%; height: 100%; object-fit: contain; display: block;
   }
   .opt4-stamp {
-    font-family: 'Bangers', Impact, sans-serif;
+    font-family: 'Bangers', cursive;
     font-size: clamp(11.5px, 3.2vw, 18px);
     letter-spacing: 0.6px;
     color: var(--red);
     background: #fff;
     border: 2px dashed var(--red);
-    padding: 4px 10px;
+    padding: 4px 8px;
     border-radius: 6px;
     text-transform: uppercase;
     transform: rotate(-2deg);
-    box-shadow: 3px 3px 0 var(--ink);
-    margin-bottom: 8px;
+    box-shadow: 2.5px 2.5px 0 var(--ink);
+    margin-bottom: 6px;
     line-height: 1.1;
     white-space: nowrap;
     max-width: 96%;
@@ -850,17 +901,18 @@
     color: #fff;
     font-size: 13px;
     max-width: 440px;
-    line-height: 1.2;
+    line-height: 1.22;
     margin: 0 0 8px;
     text-shadow: 1px 1px 0 rgba(0,0,0,0.6);
+    word-break:break-word;
   }
   .opt4-bar-wrap {
     background: #333;
     border: 2px solid var(--yellow);
     border-radius: 999px;
-    height: 13px;
+    height: 12px;
     width: 100%;
-    max-width: 240px;
+    max-width: 220px;
     margin: 0 auto 6px;
     overflow: hidden;
   }
@@ -879,45 +931,13 @@
   #photoLightbox{
     position:fixed; inset:0; background:rgba(0,0,0,.92); display:none;
     align-items:center; justify-content:center; z-index:10005;
-    padding:16px;
+    padding:12px;
   }
   #photoLightbox.show{display:flex;}
   #photoLightbox img{
     max-width:94vw; max-height:86vh; object-fit:contain;
-    border:3.5px solid var(--yellow); border-radius:14px;
-    box-shadow:0 8px 30px rgba(0,0,0,.8);
-  }
-
-  /* AJUSTE EXCLUSIVO MOBILE */
-  @media (max-width: 600px) {
-    body { font-size: 15px; line-height: 1.25; }
-    p.lede { font-size: 15px; line-height: 1.25; }
-    .eyebrow { font-size: 13.5px; padding: 6px 16px; }
-    .tab { font-size: 15px; padding: 10px 2px; }
-    .comic-tag { font-size: 13px; }
-    .comic-badge-act { font-size: 16px; }
-    .folder-tab { font-size: 12.5px; height: 20px; }
-    .villain-summary-txt { font-size: 14px; line-height: 1.25; }
-    .villain-comic-phrase { font-size: 13.5px; line-height: 1.25; }
-    .click-hint { font-size: 13px; }
-    .notice-box { font-size: 14.5px; line-height: 1.25; }
-    .btn-whats { font-size: 16px; }
-    .ensaios-manifesto-box { font-size: 14.5px; line-height: 1.25; }
-    .album-callout { font-size: 14px; line-height: 1.25; }
-    .section-title { font-size: 20px; }
-    .item-name { font-size: 19px; }
-    .item-meta { font-size: 13.5px; line-height: 1.25; }
-    .ens-info-callout { font-size: 14px; line-height: 1.25; }
-    .ens-mission-card { font-size: 14px; line-height: 1.25; }
-    .ens-narrative-card { font-size: 14px; line-height: 1.25; }
-    .agenda-list { font-size: 14px; line-height: 1.25; }
-    .recap-box { font-size: 14px; line-height: 1.25; }
-    .info-item { font-size: 14px; line-height: 1.25; }
-    .opt4-msg { font-size: 14px; line-height: 1.25; }
-    .dossier-section { font-size: 14px; line-height: 1.25; }
-    .dossier-section-title { font-size: 16px; }
-    .btn { font-size: 17px; }
-    .back-btn { font-size: 15px; }
+    border:3px solid var(--yellow); border-radius:12px;
+    box-shadow:0 6px 24px rgba(0,0,0,.8);
   }
 </style>
 </head>
@@ -955,17 +975,17 @@
         <div class="prologue-img-wrap">
           <img src="insigniavermelha.png" alt="Brasão SuperSonoros" class="prologue-img" />
         </div>
-        <div style="flex:1;">
-          <h2 style="font-family:'Bangers', cursive; font-size:23px; color:#000000; margin:0 0 6px; text-transform:uppercase;">Ninguém Nasce Pronto: A Arte de se Tornar Herói</h2>
-          <p id="prologueTxt1" style="margin:0 0 6px; color:#000000; font-size:14px; line-height:1.25;"></p>
-          <p id="prologueTxt2" style="margin:0; color:#000000; font-size:13.5px; line-height:1.25;"></p>
+        <div style="flex:1; width:100%;">
+          <h2 style="font-family:'Bangers', cursive; font-size:22px; color:#000000; margin:0 0 6px; text-transform:uppercase; word-break:break-word;">Ninguém Nasce Pronto: A Arte de se Tornar Herói</h2>
+          <p id="prologueTxt1" style="margin:0 0 6px; color:#000000; font-size:13.5px; line-height:1.25; word-break:break-word;"></p>
+          <p id="prologueTxt2" style="margin:0; color:#000000; font-size:13px; line-height:1.25; word-break:break-word;"></p>
         </div>
       </div>
 
       <!-- AS 4 AMEAÇAS -->
       <div class="comic-act-header">
         <span class="comic-badge-act">As 4 Ameaças</span>
-        <p id="threatSubtitle" style="font-size:13.5px; color:#FFFFFF; margin:6px 0 0; text-shadow:1.5px 1.5px 0 rgba(0,0,0,0.5);"></p>
+        <p id="threatSubtitle" style="font-size:13px; color:#FFFFFF; margin:6px 0 0; text-shadow:1.5px 1.5px 0 rgba(0,0,0,0.5); word-break:break-word;"></p>
       </div>
 
       <!-- DOSSIÊS -->
@@ -1066,11 +1086,11 @@
         <div class="folder-tab" style="background:#171512; color:var(--yellow); border:2.5px solid var(--yellow); border-bottom:none;">Arquivo Confidencial</div>
         <div class="comic-villain-card" style="background:#171512; border:3.5px solid var(--yellow); border-radius:0 18px 18px 18px; box-shadow:4px 4px 0 var(--ink);">
           <div class="villain-avatar-box">
-            <div class="boss-mystery-avatar" style="width:78px; height:90px; font-size:38px; border:2.5px dashed var(--yellow); background:transparent; color:var(--yellow); display:flex; align-items:center; justify-content:center; box-shadow:none;">?</div>
+            <div class="boss-mystery-avatar" style="width:75px; height:85px; font-size:38px; border:2px dashed var(--yellow); background:transparent; color:var(--yellow); display:flex; align-items:center; justify-content:center; box-shadow:none;">?</div>
           </div>
           <div class="villain-body-box">
             <div>
-              <div style="font-family:'Bangers', cursive; font-size:20px; color:var(--yellow); margin:0 0 2px; letter-spacing:1px; text-transform:uppercase;">A Ameaça Final</div>
+              <div style="font-family:'Bangers', cursive; font-size:19px; color:var(--yellow); margin:0 0 2px; letter-spacing:1px; text-transform:uppercase;">A Ameaça Final</div>
               <div id="bossDesc1" class="villain-summary-txt" style="color:rgba(255,255,255,0.9);"></div>
             </div>
             <div>
@@ -1087,11 +1107,11 @@
 
       <!-- EPÍLOGO -->
       <div class="comic-prologue-card" style="background:#FFF9E6; border-color:var(--ink); margin-bottom:0; text-align:center; justify-content:center;">
-        <div style="max-width:820px; margin:0 auto;">
+        <div style="max-width:820px; margin:0 auto; width:100%;">
           <span class="comic-tag" style="background:var(--ink); color:var(--yellow);">Epílogo · O Palco da Decisão</span>
-          <h2 style="font-family:'Bangers', cursive; font-size:22px; color:var(--ink); margin:4px 0 6px; text-transform:uppercase;">A Batalha Não Começa no Palco. Ela Termina Lá!</h2>
-          <p id="epilogueTxt" style="margin:0 0 10px; color:#000000; font-size:13.5px; line-height:1.25;"></p>
-          <div style="font-family:'Bangers', cursive; font-size:22px; letter-spacing:1.2px; color:var(--red); text-transform:uppercase;">SER ÚNICO É O SEU SUPERPODER!</div>
+          <h2 style="font-family:'Bangers', cursive; font-size:21px; color:var(--ink); margin:4px 0 6px; text-transform:uppercase; word-break:break-word;">A Batalha Não Começa no Palco. Ela Termina Lá!</h2>
+          <p id="epilogueTxt" style="margin:0 0 8px; color:#000000; font-size:13px; line-height:1.25; word-break:break-word;"></p>
+          <div style="font-family:'Bangers', cursive; font-size:20px; letter-spacing:1px; color:var(--red); text-transform:uppercase; word-break:break-word;">SER ÚNICO É O SEU SUPERPODER!</div>
         </div>
       </div>
 
@@ -1117,7 +1137,7 @@
       </div>
 
       <div class="ensaios-manifesto-box">
-        <div style="font-family:'Bangers', cursive; font-size:19px; color:var(--red); margin-bottom:4px; letter-spacing:1px; text-transform:uppercase;">
+        <div style="font-family:'Bangers', cursive; font-size:18px; color:var(--red); margin-bottom:4px; letter-spacing:1px; text-transform:uppercase;">
           A Preparação da Liga SuperSonoros
         </div>
         <p style="margin:0 0 6px; color:#171512;">
@@ -1134,14 +1154,14 @@
       </div>
     </div>
 
-    <!-- TELA DE DETALHES DO ENSAIO -->
+    <!-- TELA DE DETALHES DO ENSAIO (AJUSTADA PARA MOBILE SEM CORTES) -->
     <div id="view-ensaio-detail" class="hidden">
       <button class="back-btn" onclick="goEnsaiosHome()">← Voltar aos Ensaios</button>
 
       <div class="panel">
         <div class="ens-header-card">
           <div>
-            <h1 id="ensTitle" style="font-size:26px;text-align:left;color:var(--yellow);margin:0 0 4px;">Ensaio</h1>
+            <h1 id="ensTitle" style="font-size:24px;text-align:left;color:var(--yellow);margin:0 0 4px;">Ensaio</h1>
             <p class="lede" style="color:#666;text-align:left;margin-bottom:6px;max-width:none;" id="ensDate"></p>
             <div class="info-item" style="margin-bottom:0;">
               <span id="ensLocation"></span>
@@ -1152,26 +1172,28 @@
       </div>
 
       <div class="grid-detail-cols">
+        <!-- BLOCO DA ESQUERDA: PEDAGÓGICO COM CONTENÇÃO RIGOROSA -->
         <div class="panel" style="margin-bottom:0;">
           
           <div class="silhouette-card">
             <div class="silhouette-avatar">
               <img id="ensVillainImg" src="" alt="Silhueta do Vilão" class="silhouette-img" />
             </div>
-            <div>
-              <div style="font-family:'Bangers', cursive; font-size:19px; letter-spacing:1px; color:var(--ink); text-transform:uppercase;" id="ensVillainTitle">Ameaça</div>
-              <div id="ensVillainSubtitle" style="font-size:13px; color:#444; line-height:1.25; margin-top:2px;"></div>
+            <div style="flex:1; min-width:0;">
+              <div style="font-family:'Bangers', cursive; font-size:18px; letter-spacing:1px; color:var(--ink); text-transform:uppercase; word-break:break-word;" id="ensVillainTitle">Ameaça</div>
+              <div id="ensVillainSubtitle" style="font-size:12.5px; color:#444; line-height:1.2; margin-top:2px; word-break:break-word;"></div>
             </div>
           </div>
 
           <div class="section-title">O que faremos no ensaio</div>
-          <div id="ensAgendaBox"></div>
+          <div id="ensAgendaBox" style="width:100%; max-width:100%;"></div>
         </div>
 
+        <!-- BLOCO DA DIREITA: CARROSSEL DE FOTOS -->
         <div class="panel" style="margin-bottom:0;">
           <div class="section-title">Fotos deste Ensaio</div>
           <div id="ensPhotoViewerContainer"></div>
-          <p id="ensPhotosDisclaimer" style="font-size:12px;color:#888;font-style:italic;margin:10px 0 0;"></p>
+          <p id="ensPhotosDisclaimer" style="font-size:12px;color:#888;font-style:italic;margin:8px 0 0; word-break:break-word;"></p>
         </div>
       </div>
     </div>
@@ -1196,7 +1218,7 @@
           <div class="opt4-bar-wrap">
             <div class="opt4-bar-fill"></div>
           </div>
-          <div style="font-size:10.5px; font-family:'Bangers', cursive; color:var(--yellow); letter-spacing:1px; text-shadow:1px 1px 0 #000;">
+          <div style="font-size:10px; font-family:'Bangers', cursive; color:var(--yellow); letter-spacing:1px; text-shadow:1px 1px 0 #000;">
             STATUS: DESCRIPTOGRAFANDO ESCALAS DE PALCO...
           </div>
         </div>
@@ -1208,11 +1230,11 @@
       <button class="back-btn" onclick="goSessionHome()">← Voltar às Sessões</button>
 
       <div class="panel">
-        <h1 id="sessTitle" style="font-size:26px;text-align:left;margin:0 0 4px;">Sessão</h1>
+        <h1 id="sessTitle" style="font-size:24px;text-align:left;margin:0 0 4px;">Sessão</h1>
         <p class="lede" style="color:#555;margin-bottom:0;text-align:left;max-width:none;" id="sessSubtitle"></p>
       </div>
 
-      <div class="grid-detail-cols" style="margin-bottom:16px;">
+      <div class="grid-detail-cols" style="margin-bottom:14px;">
         <div class="panel" style="margin-bottom:0;">
           <div class="section-title">Ordem de apresentação</div>
           <div id="lineupList"></div>
@@ -1228,7 +1250,7 @@
               <span class="power-chip" style="background:#E8792B;">Disciplina</span>
               <span class="power-chip" style="background:#3CB878;">Iniciativa</span>
             </div>
-            <p style="margin:12px 0 0;">No grande palco, a união de todos esses poderes sonoros vai fazer o show acontecer de verdade!</p>
+            <p style="margin:10px 0 0;">No grande palco, a união de todos esses poderes sonoros vai fazer o show acontecer de verdade!</p>
           </div>
         </div>
       </div>
@@ -1243,8 +1265,8 @@
 
         <div class="panel" style="margin-bottom:0;">
           <div class="section-title">Compartilhe o momento</div>
-          <p id="sessSharePrompt" style="font-size:13.5px;line-height:1.25;margin:0 0 12px;"></p>
-          <div class="chip-list" style="margin-bottom:16px;">
+          <p id="sessSharePrompt" style="font-size:13px;line-height:1.22;margin:0 0 10px;"></p>
+          <div class="chip-list" style="margin-bottom:14px;">
             <span class="power-chip" style="background:var(--blue);">#SUPERSONOROS</span>
             <span class="power-chip" style="background:var(--red);">@guitarrissima</span>
           </div>
@@ -1324,7 +1346,7 @@
 
 <script>
   /* ========================================================
-     1. DADOS FUNDAMENTAIS COM AS 10 FOTOS
+     1. DADOS FUNDAMENTAIS COM AS 10 FOTOS REAIS DO ENSAIO 1
      ======================================================== */
   const ENSAIOS = [
     { 
@@ -1352,7 +1374,7 @@
       agenda: 
         '<div class="ens-mission-card">' +
           '<div style="font-family:\'Bangers\', cursive; font-size:16px; color:var(--purple); margin-bottom:4px; text-transform:uppercase;">Missão do Ensaio:</div>' +
-          '<div style="font-size:13.5px; line-height:1.2; color:#171512;">' +
+          '<div style="font-size:13px; line-height:1.2; color:#171512;">' +
             'Definição do nome oficial da banda e a escolha da música que defenderão no espetáculo!' +
           '</div>' +
         '</div>' +
@@ -1360,7 +1382,7 @@
           '<div style="font-family:\'Bangers\', cursive; font-size:15px; color:var(--ink); margin-bottom:4px; text-transform:uppercase;">Confronto Pedagógico:</div>' +
           '<p style="margin:0;">A banda enfrenta o <strong>Copião</strong> — um ser que detesta originalidade e tenta fazer todos parecerem iguais. Ao definirem sua própria identidade, os alunos ativarão o <strong>superpoder da Autenticidade</strong>.</p>' +
         '</div>' +
-        '<div style="font-family:\'Bangers\', cursive; font-size:15px; color:var(--ink); margin:10px 0 6px; text-transform:uppercase;">Etapas Práticas:</div>' +
+        '<div style="font-family:\'Bangers\', cursive; font-size:15px; color:var(--ink); margin:8px 0 4px; text-transform:uppercase;">Etapas Práticas:</div>' +
         '<ul class="agenda-list">' +
           '<li><strong>Integração:</strong> Dinâmica rápida de entrosamento entre os alunos com os professores.</li>' +
           '<li><strong>Nome da banda:</strong> Definição oficial do nome do grupo.</li>' +
@@ -1382,7 +1404,7 @@
       agenda: 
         '<div class="ens-mission-card">' +
           '<div style="font-family:\'Bangers\', cursive; font-size:16px; color:var(--orange); margin-bottom:4px; text-transform:uppercase;">Missão do Ensaio:</div>' +
-          '<div style="font-size:13.5px; line-height:1.2; color:#171512;">' +
+          '<div style="font-size:13px; line-height:1.2; color:#171512;">' +
             'Planejar os figurinos do espetáculo e tirar a foto oficial dos membros da banda para o telão!' +
           '</div>' +
         '</div>' +
@@ -1390,7 +1412,7 @@
           '<div style="font-family:\'Bangers\', cursive; font-size:15px; color:var(--ink); margin-bottom:4px; text-transform:uppercase;">Confronto Pedagógico:</div>' +
           '<p style="margin:0;">Uma ameaça dupla tenta criar caos e fazer com que cada músico queira aparecer mais que o colega. Ao prestarem atenção no que seus colegas estão tocando, nossos artistas despertarão o <strong>superpoder da Escuta</strong>.</p>' +
         '</div>' +
-        '<div style="font-family:\'Bangers\', cursive; font-size:15px; color:var(--ink); margin:10px 0 6px; text-transform:uppercase;">Etapas Práticas:</div>' +
+        '<div style="font-family:\'Bangers\', cursive; font-size:15px; color:var(--ink); margin:8px 0 4px; text-transform:uppercase;">Etapas Práticas:</div>' +
         '<ul class="agenda-list">' +
           '<li><strong>Figurino:</strong> Combinar roupas e adereços para instrumentos/palco.</li>' +
           '<li><strong>Foto oficial:</strong> Registro dos membros da banda reunidos.</li>' +
@@ -1411,7 +1433,7 @@
       agenda: 
         '<div class="ens-mission-card">' +
           '<div style="font-family:\'Bangers\', cursive; font-size:16px; color:var(--orange); margin-bottom:4px; text-transform:uppercase;">Missão do Ensaio:</div>' +
-          '<div style="font-size:13.5px; line-height:1.2; color:#171512;">' +
+          '<div style="font-size:13px; line-height:1.2; color:#171512;">' +
             'Prática intensiva de performance e teste final dos figurinos completos com a presença de um responsável.' +
           '</div>' +
         '</div>' +
@@ -1419,7 +1441,7 @@
           '<div style="font-family:\'Bangers\', cursive; font-size:15px; color:var(--ink); margin-bottom:4px; text-transform:uppercase;">Confronto Pedagógico:</div>' +
           '<p style="margin:0;">A tentação de achar que acertar uma vez já basta! Usando a arma secreta do <em>Repeteco</em> para dominar cada nota, vocês ativam a <strong>Disciplina</strong>.</p>' +
         '</div>' +
-        '<div style="font-family:\'Bangers\', cursive; font-size:15px; color:var(--ink); margin:10px 0 6px; text-transform:uppercase;">Etapas Práticas:</div>' +
+        '<div style="font-family:\'Bangers\', cursive; font-size:15px; color:var(--ink); margin:8px 0 4px; text-transform:uppercase;">Etapas Práticas:</div>' +
         '<ul class="agenda-list">' +
           '<li><strong>Treino intensivo:</strong> Prática com o método do Repeteco para consolidar as passagens.</li>' +
           '<li><strong>Alinhamento dinâmico:</strong> Ajustes de entradas, finalizações e presença de palco.</li>' +
@@ -1439,7 +1461,7 @@
       agenda: 
         '<div class="ens-mission-card">' +
           '<div style="font-family:\'Bangers\', cursive; font-size:16px; color:var(--green); margin-bottom:4px; text-transform:uppercase;">Missão do Ensaio:</div>' +
-          '<div style="font-size:13.5px; line-height:1.2; color:#171512;">' +
+          '<div style="font-size:13px; line-height:1.2; color:#171512;">' +
             'Treinar a presença de palco e sentir a energia de como vai ser no dia do show!' +
           '</div>' +
         '</div>' +
@@ -1447,7 +1469,7 @@
           '<div style="font-family:\'Bangers\', cursive; font-size:15px; color:var(--ink); margin-bottom:4px; text-transform:uppercase;">Confronto Pedagógico:</div>' +
           '<p style="margin:0;">A dúvida de última hora tentando dar aquele frio na barriga. A galera vai dar a primeira nota com atitude e ativar o <strong>superpoder da Iniciativa</strong>!</p>' +
         '</div>' +
-        '<div style="font-family:\'Bangers\', cursive; font-size:15px; color:var(--ink); margin:10px 0 6px; text-transform:uppercase;">Etapas Práticas:</div>' +
+        '<div style="font-family:\'Bangers\', cursive; font-size:15px; color:var(--ink); margin:8px 0 4px; text-transform:uppercase;">Etapas Práticas:</div>' +
         '<ul class="agenda-list">' +
           '<li><strong>Passagem geral:</strong> Ensaio corrido simulando as condições reais do palco.</li>' +
           '<li><strong>Preparação final:</strong> Ajustes finais com a equipe e orientações para o grande dia.</li>' +
@@ -1616,8 +1638,8 @@
       avatarHtml = 
         '<div class="boss-mystery-avatar">?</div>' +
         '<div>' +
-          '<h2 style="font-family:\'Bangers\', cursive;font-size:26px;margin:0 0 2px;color:var(--red);-webkit-text-stroke:0.5px var(--ink);">' + v.code + '</h2>' +
-          '<div style="font-size:11.5px;font-weight:900;color:var(--red);letter-spacing:0.5px;">SINAL CODIFICADO // IDENTIDADE SOB SIGILO</div>' +
+          '<h2 style="font-family:\'Bangers\', cursive;font-size:24px;margin:0 0 2px;color:var(--red);-webkit-text-stroke:0.5px var(--ink);">' + v.code + '</h2>' +
+          '<div style="font-size:11px;font-weight:900;color:var(--red);letter-spacing:0.5px;">SINAL CODIFICADO // IDENTIDADE SOB SIGILO</div>' +
         '</div>';
     } else {
       avatarHtml = 
@@ -1625,8 +1647,8 @@
           '<img src="' + v.img + '" alt="' + v.code + '" style="width:100%;height:100%;object-fit:contain;filter:drop-shadow(2px 2px 0 rgba(0,0,0,0.15));" onerror="if(!this.dataset.tried){this.dataset.tried=\'1\';this.src=\'copiao.jpg\';}" />' +
         '</div>' +
         '<div>' +
-          '<h2 style="font-family:\'Bangers\', cursive;font-size:25px;margin:0 0 2px;color:' + v.color + ';-webkit-text-stroke:0.5px var(--ink);">' + v.code + '</h2>' +
-          '<div style="font-size:12px;color:#666;">Status: ' + (v.status || "Identidade sob sigilo") + '</div>' +
+          '<h2 style="font-family:\'Bangers\', cursive;font-size:24px;margin:0 0 2px;color:' + v.color + ';-webkit-text-stroke:0.5px var(--ink);">' + v.code + '</h2>' +
+          '<div style="font-size:11.5px;color:#666;">Status: ' + (v.status || "Identidade sob sigilo") + '</div>' +
         '</div>';
     }
 
@@ -1648,7 +1670,7 @@
       '<div class="dossier-section" style="background:#FFF9E6;border-left:4px solid ' + v.color + ';padding:8px 10px;border-radius:6px;">' +
         '<div class="dossier-section-title" style="color:' + v.color + ';">Como vencer essa ameaça:</div>' +
         '<p style="margin:0 0 4px;">' + v.derrota + '</p>' +
-        '<div style="font-size:12.5px;font-weight:900;color:var(--ink);">Superpoder destravado: <span style="color:' + v.color + ';">' + v.superpoder + '</span></div>' +
+        '<div style="font-size:12px;font-weight:900;color:var(--ink);">Superpoder destravado: <span style="color:' + v.color + ';">' + v.superpoder + '</span></div>' +
       '</div>' +
       '<button class="btn-close-bottom" onclick="closeVillainModal()">✕ Fechar Dossiê</button>';
 
@@ -1674,10 +1696,26 @@
   }
 
   /* ========================================================
-     3. VISUALIZADOR DE FOTOS (100% PURO E DIRETO)
+     3. VISUALIZADOR DE FOTOS (COM AS ROTAÇÕES DIRETAS)
      ======================================================== */
   let currentEnsaioPhotos = [];
   let currentPhotoIndex = 0;
+
+  function getPhotoStyleByName(src) {
+    if (!src) return "transform: none;";
+    if (src.includes("ensaio1-foto4")) return "transform: rotate(180deg);";
+    if (src.includes("ensaio1-foto6")) return "transform: rotate(180deg);";
+    if (src.includes("ensaio1-foto7")) return "transform: rotate(-90deg) scale(0.72);";
+    return "transform: none;";
+  }
+
+  function getThumbStyleByName(src) {
+    if (!src) return "transform: none;";
+    if (src.includes("ensaio1-foto4")) return "transform: rotate(180deg);";
+    if (src.includes("ensaio1-foto6")) return "transform: rotate(180deg);";
+    if (src.includes("ensaio1-foto7")) return "transform: rotate(-90deg) scale(1.35);";
+    return "transform: none;";
+  }
 
   function renderPhotoViewer(photos) {
     currentEnsaioPhotos = (photos && photos.length > 0) ? photos : [];
@@ -1696,17 +1734,20 @@
 
     let thumbHtml = '';
     for (let i = 0; i < currentEnsaioPhotos.length; i++) {
+      const src = currentEnsaioPhotos[i];
       thumbHtml += `
         <div class="photo-thumb-item ${i === 0 ? 'active' : ''}" onclick="selectPhoto(${i})">
-          <img src="${currentEnsaioPhotos[i]}" alt="Miniatura ${i + 1}" loading="lazy" decoding="async" />
+          <img src="${src}" style="${getThumbStyleByName(src)}" alt="Miniatura ${i + 1}" loading="lazy" decoding="async" />
         </div>`;
     }
+
+    const firstSrc = currentEnsaioPhotos[0];
 
     container.innerHTML = `
       <div class="photo-viewer-wrap">
         <div class="photo-main-frame">
           <button class="photo-nav-btn photo-btn-prev" onclick="navigatePhoto(-1)">‹</button>
-          <img id="mainViewerImg" src="${currentEnsaioPhotos[0]}" alt="Foto do Ensaio" fetchpriority="high" onclick="openLightbox(this.src)" />
+          <img id="mainViewerImg" src="${firstSrc}" style="${getPhotoStyleByName(firstSrc)}" alt="Foto do Ensaio" fetchpriority="high" onclick="openLightbox(this.src)" />
           <button class="photo-nav-btn photo-btn-next" onclick="navigatePhoto(1)">›</button>
           <div class="photo-counter-badge" id="photoCounter">1 / ${currentEnsaioPhotos.length}</div>
         </div>
@@ -1740,9 +1781,11 @@
   function updateViewerUI() {
     const mainImg = document.getElementById("mainViewerImg");
     const counter = document.getElementById("photoCounter");
+    const currentSrc = currentEnsaioPhotos[currentPhotoIndex];
 
     if (mainImg) {
-      mainImg.src = currentEnsaioPhotos[currentPhotoIndex];
+      mainImg.src = currentSrc;
+      mainImg.style.cssText = getPhotoStyleByName(currentSrc);
       mainImg.onclick = () => openLightbox(mainImg.src);
     }
     if (counter) {
@@ -1764,6 +1807,7 @@
     const lb = document.getElementById("photoLightbox");
     const img = document.getElementById("lightboxImg");
     img.src = src;
+    img.style.cssText = getPhotoStyleByName(src);
     lb.classList.add("show");
   }
   function closeLightbox(){
