@@ -556,7 +556,10 @@
     transition: transform .25s ease;
   }
 
-  /* CLASSES DE ROTAÇÃO PRECISA */
+  /* CLASSES DE ROTAÇÃO ESPECÍFICAS */
+  .rotate-180 {
+    transform: rotate(180deg) !important;
+  }
   .rotate-right {
     transform: rotate(90deg) scale(0.72) !important;
   }
@@ -640,6 +643,9 @@
     height: 100%;
     object-fit: cover;
     display: block;
+  }
+  .photo-thumb-item img.rotate-180 {
+    transform: rotate(180deg) !important;
   }
   .photo-thumb-item img.rotate-right {
     transform: rotate(90deg) scale(1.35) !important;
@@ -1692,16 +1698,16 @@
   }
 
   /* ========================================================
-     3. VISUALIZADOR DE FOTOS COM ROTAÇÕES INDIVIDUAIS
+     3. VISUALIZADOR DE FOTOS (AJUSTES PRECISOS SOLICITADOS)
      ======================================================== */
   let currentEnsaioPhotos = [];
   let currentPhotoIndex = 0;
 
-  // Mapa exato:
-  // Foto 4 (índice 3) -> rotate-right
-  // Foto 5 (índice 4) -> rotate-left
-  // Foto 6 (índice 5) -> rotate-right
-  // Foto 2 e as demais -> normais (sem rotação)
+  // Mapa de rotações exato:
+  // Foto 4 (índice 3) -> Virar para a direita (90deg)
+  // Foto 5 (índice 4) -> Virar para a esquerda (-90deg)
+  // Foto 6 (índice 5) -> Virar para a direita (90deg)
+  // Demais fotos (1, 2, 3, 7, 8, 9, 10) -> Normais (sem rotação)
   function getPhotoRotationClass(idx) {
     if (idx === 3) return 'rotate-right'; // Foto 4
     if (idx === 4) return 'rotate-left';  // Foto 5
@@ -1918,6 +1924,7 @@
         const img = document.createElement('img');
         img.src = src;
         img.className = 'ghost-villain';
+        img.onerror = function(){ if(!this.dataset.tried){ this.dataset.tried='1'; this.src='copiao.jpg'; } };
         placeGhostInSector(img, idx);
         
         img.addEventListener('mouseenter', function() {
