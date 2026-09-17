@@ -554,7 +554,6 @@
     display: block;
     cursor: pointer;
     transition: transform .25s ease;
-    image-orientation: from-image;
   }
 
   .photo-nav-btn{
@@ -634,7 +633,6 @@
     object-fit: cover;
     display: block;
     transition: transform .2s ease;
-    image-orientation: from-image;
   }
 
   .photo-placeholder-box{
@@ -891,7 +889,6 @@
     border:3.5px solid var(--yellow); border-radius:14px;
     box-shadow:0 8px 30px rgba(0,0,0,.8);
     transition: transform .2s ease;
-    image-orientation: from-image;
   }
 
   /* ========================================================
@@ -1630,7 +1627,7 @@
     } else {
       avatarHtml = 
         '<div class="dossier-avatar">' +
-          '<img src="' + v.img + '" alt="' + v.code + '" style="width:100%;height:100%;object-fit:contain;filter:drop-shadow(2px 2px 0 rgba(0,0,0,0.15));" onerror="if(!this.dataset.tried){this.dataset.tried='1';this.src='copiao.jpg';}" />' +
+          '<img src="' + v.img + '" alt="' + v.code + '" style="width:100%;height:100%;object-fit:contain;filter:drop-shadow(2px 2px 0 rgba(0,0,0,0.15));" onerror="if(!this.dataset.tried){this.dataset.tried=\'1\';this.src=\'copiao.jpg\';}" />' +
         '</div>' +
         '<div>' +
           '<h2 style="font-family:\'Bangers\', cursive;font-size:25px;margin:0 0 2px;color:' + v.color + ';-webkit-text-stroke:0.5px var(--ink);">' + v.code + '</h2>' +
@@ -1682,37 +1679,29 @@
   }
 
   /* ========================================================
-     3. VISUALIZADOR DE FOTOS (COM CONFIGURAÇÃO EXPLÍCITA)
+     3. VISUALIZADOR DE FOTOS (DIRETO PELO NOME DO ARQUIVO)
      ======================================================== */
   let currentEnsaioPhotos = [];
   let currentPhotoIndex = 0;
 
-  // Dicionário com os graus exatos de cada foto (1 a 10):
-  // Foto 4 (índice 3): 90deg (direita)
-  // Foto 5 (índice 4): -90deg (esquerda)
-  // Foto 6 (índice 5): 90deg (direita)
-  // Todas as demais: 0deg (sem rotação)
-  const PHOTO_ROTATIONS = {
-    3: 90,   // Foto 4
-    4: -90,  // Foto 5
-    5: 90    // Foto 6
-  };
-
-  function getPhotoStyle(idx) {
-    const deg = PHOTO_ROTATIONS[idx] || 0;
-    if (deg !== 0) {
-      const scale = (Math.abs(deg) === 90 || Math.abs(deg) === 270) ? 0.72 : 1;
-      return "transform: rotate(" + deg + "deg) scale(" + scale + ");";
-    }
+  // ROTAÇÃO EXATA BASEADA NO NOME DO ARQUIVO:
+  // ensaio1-foto4.png -> 180° (estava de ponta-cabeça nos prints)
+  // ensaio1-foto6.png -> 180° (estava de ponta-cabeça nos prints)
+  // ensaio1-foto7.png -> -90° (girar para a esquerda)
+  // Qualquer outro arquivo -> 0°
+  function getPhotoStyleByName(src) {
+    if (!src) return "transform: none;";
+    if (src.includes("ensaio1-foto4")) return "transform: rotate(180deg);";
+    if (src.includes("ensaio1-foto6")) return "transform: rotate(180deg);";
+    if (src.includes("ensaio1-foto7")) return "transform: rotate(-90deg) scale(0.72);";
     return "transform: none;";
   }
 
-  function getThumbStyle(idx) {
-    const deg = PHOTO_ROTATIONS[idx] || 0;
-    if (deg !== 0) {
-      const scale = (Math.abs(deg) === 90 || Math.abs(deg) === 270) ? 1.35 : 1;
-      return "transform: rotate(" + deg + "deg) scale(" + scale + ");";
-    }
+  function getThumbStyleByName(src) {
+    if (!src) return "transform: none;";
+    if (src.includes("ensaio1-foto4")) return "transform: rotate(180deg);";
+    if (src.includes("ensaio1-foto6")) return "transform: rotate(180deg);";
+    if (src.includes("ensaio1-foto7")) return "transform: rotate(-90deg) scale(1.35);";
     return "transform: none;";
   }
 
@@ -1733,19 +1722,20 @@
 
     let thumbHtml = '';
     for (let i = 0; i < currentEnsaioPhotos.length; i++) {
+      const src = currentEnsaioPhotos[i];
       thumbHtml += `
         <div class="photo-thumb-item ${i === 0 ? 'active' : ''}" onclick="selectPhoto(${i})">
-          <img src="${currentEnsaioPhotos[i]}" style="${getThumbStyle(i)}" alt="Miniatura ${i + 1}" loading="lazy" decoding="async" />
+          <img src="${src}" style="${getThumbStyleByName(src)}" alt="Miniatura ${i + 1}" loading="lazy" decoding="async" />
         </div>`;
     }
 
-    const firstStyle = getPhotoStyle(0);
+    const firstSrc = currentEnsaioPhotos[0];
 
     container.innerHTML = `
       <div class="photo-viewer-wrap">
         <div class="photo-main-frame">
           <button class="photo-nav-btn photo-btn-prev" onclick="navigatePhoto(-1)">‹</button>
-          <img id="mainViewerImg" src="${currentEnsaioPhotos[0]}" style="${firstStyle}" alt="Foto do Ensaio" fetchpriority="high" onclick="openLightbox(this.src, 0)" />
+          <img id="mainViewerImg" src="${firstSrc}" style="${getPhotoStyleByName(firstSrc)}" alt="Foto do Ensaio" fetchpriority="high" onclick="openLightbox(this.src)" />
           <button class="photo-nav-btn photo-btn-next" onclick="navigatePhoto(1)">›</button>
           <div class="photo-counter-badge" id="photoCounter">1 / ${currentEnsaioPhotos.length}</div>
         </div>
@@ -1779,11 +1769,12 @@
   function updateViewerUI() {
     const mainImg = document.getElementById("mainViewerImg");
     const counter = document.getElementById("photoCounter");
+    const currentSrc = currentEnsaioPhotos[currentPhotoIndex];
 
     if (mainImg) {
-      mainImg.src = currentEnsaioPhotos[currentPhotoIndex];
-      mainImg.style.cssText = getPhotoStyle(currentPhotoIndex);
-      mainImg.onclick = () => openLightbox(mainImg.src, currentPhotoIndex);
+      mainImg.src = currentSrc;
+      mainImg.style.cssText = getPhotoStyleByName(currentSrc);
+      mainImg.onclick = () => openLightbox(mainImg.src);
     }
     if (counter) {
       counter.textContent = (currentPhotoIndex + 1) + " / " + currentEnsaioPhotos.length;
@@ -1800,11 +1791,11 @@
     prefetchNearbyPhotos(currentPhotoIndex);
   }
 
-  function openLightbox(src, idx){
+  function openLightbox(src){
     const lb = document.getElementById("photoLightbox");
     const img = document.getElementById("lightboxImg");
     img.src = src;
-    img.style.cssText = typeof idx === 'number' ? getPhotoStyle(idx) : "transform: none;";
+    img.style.cssText = getPhotoStyleByName(src);
     lb.classList.add("show");
   }
   function closeLightbox(){
