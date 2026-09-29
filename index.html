@@ -353,7 +353,7 @@
   }
   .btn-whats{
     display:inline-flex; align-items:center; justify-content:center; gap:8px; background:var(--whatsapp); color:#fff;
-    font-family:'Bangers', cursive; font-size:15px; letter-spacing:1px; text-transform:uppercase;
+    font-family:'Bangers', Impact, sans-serif; font-size:15px; letter-spacing:1px; text-transform:uppercase;
     padding:9px 14px; border-radius:10px; border:2.5px solid var(--ink); text-decoration:none;
     box-shadow:3px 3px 0 var(--ink); text-shadow:1px 1px 0 rgba(0,0,0,0.4); flex-shrink:0;
     width:100%;
@@ -444,7 +444,7 @@
   .item-dot{
     width:40px; height:40px; border-radius:50%; flex-shrink:0; display:flex;
     align-items:center; justify-content:center;
-    color:#fff; font-family:'Bangers', cursive; font-size:18px; letter-spacing:.5px;
+    color:#fff; font-family:'Bangers', Impact, sans-serif; font-size:18px; letter-spacing:.5px;
     border:2px solid var(--ink); text-shadow:1.5px 1.5px 0 var(--ink);
   }
   .item-info{flex:1; min-width:0; word-break:break-word;}
@@ -498,7 +498,7 @@
 
   .btn{
     display:flex; align-items:center; justify-content:center; gap:8px; width:100%; border:2.5px solid var(--ink); border-radius:10px;
-    background:var(--yellow); color:var(--ink); font-family:'Bangers', cursive; font-size:15px; letter-spacing:1px;
+    background:var(--yellow); color:var(--ink); font-family:'Bangers', Impact, sans-serif; font-size:15px; letter-spacing:1px;
     text-transform:uppercase; padding:9px 12px; cursor:pointer; box-shadow:3px 3px 0 var(--ink); text-decoration:none;
     text-align:center;
   }
@@ -569,7 +569,7 @@
   .agenda-list li{margin-bottom:5px;}
   .agenda-list li:last-child{margin-bottom:0;}
 
-  /* VISUALIZADOR DE FOTOS (CARROSSEL COM FOTO GRANDE - PURO DO CÓDIGO PERFEITO) */
+  /* VISUALIZADOR DE FOTOS (CARROSSEL COM FOTO GRANDE) */
   .photo-viewer-wrap{
     display: flex;
     flex-direction: column;
@@ -703,7 +703,7 @@
     flex-direction: column;
     align-items: center;
     gap: 6px;
-    margin-top: 24px;
+    margin-top: 28px;
   }
   .footer-label {
     font-family: 'Bangers', Impact, sans-serif;
@@ -1043,16 +1043,16 @@
           </div>
         </div>
 
-        <!-- VILÃO 2 -->
+        <!-- VILÃS 2: DECI & BEL -->
         <div class="folder-card-wrap" onclick="openVillainModal('v2')">
           <div class="folder-tab" style="border-top:3px solid var(--gold);">Dossiê #02</div>
           <div class="comic-villain-card" style="border-top:4.5px solid var(--gold);">
             <div class="villain-avatar-box">
-              <img src="vilao2.png" alt="Vilão 2" class="villain-silhouette" />
+              <img src="deciebel.png" alt="Deci & Bel" class="villain-silhouette" onerror="if(!this.dataset.tried){this.dataset.tried='1';this.src='deciebel.jpg';}else if(this.dataset.tried==='1'){this.dataset.tried='2';this.src='vilao2.png';}" />
             </div>
             <div class="villain-body-box">
               <div>
-                <div style="font-family:'Bangers', cursive; font-size:20px; color:var(--gold); margin:0 0 2px;">Vilão 2</div>
+                <div style="font-family:'Bangers', cursive; font-size:20px; color:var(--gold); margin:0 0 2px;">Deci & Bel</div>
                 <div id="v2Summary" class="villain-summary-txt"></div>
               </div>
               <div>
@@ -1423,8 +1423,8 @@
       name:"Ensaio 2: Escuta", 
       date:"27/09 (dom)", 
       color:"#D9A62B", 
-      villain:"Vilão 2", 
-      img:"vilao2.png", 
+      villain:"Deci & Bel", 
+      img:"deciebel.png", 
       metaDesc:"Visual do show e foto oficial dos membros da banda",
       calloutText: "📸 <strong>Atenção:</strong><br>Dia da foto oficial dos membros da banda!",
       photosDisclaimer: "As fotos da galera serão publicadas aqui logo após o término do ensaio!",
@@ -1438,7 +1438,7 @@
         '</div>' +
         '<div class="ens-narrative-card">' +
           '<div style="font-family:\'Bangers\', cursive; font-size:15px; color:var(--ink); margin-bottom:4px; text-transform:uppercase;">Confronto Pedagógico:</div>' +
-          '<p style="margin:0;">Uma ameaça dupla tenta criar caos e fazer com que cada músico queira aparecer mais que o colega. Ao prestarem atenção no que seus colegas estão tocando, nossos artistas despertarão o <strong>superpoder da Escuta</strong>.</p>' +
+          '<p style="margin:0;">A dupla explosiva <strong>Deci & Bel</strong> tenta criar caos, fazendo cada um disputar volume no palco! Ao prestarem atenção no que seus colegas estão tocando, nossos artistas despertarão o <strong>superpoder da Escuta</strong>.</p>' +
         '</div>' +
         '<div style="font-family:\'Bangers\', cursive; font-size:15px; color:var(--ink); margin:10px 0 6px; text-transform:uppercase;">Etapas Práticas:</div>' +
         '<ul class="agenda-list">' +
@@ -1562,7 +1562,7 @@
     document.getElementById("threatSubtitle").textContent = "Eles não quebram instrumentos, mas tentam bagunçar a sua cabeça! Clique no card para investigar cada ameaça:";
 
     document.getElementById("v1Summary").textContent = "O Copião tenta fazer você ter vergonha do seu estilo e copiar os outros só para parecer seguro.";
-    document.getElementById("v2Summary").textContent = "Quer que todo mundo dispute volume no palco, criando barulho em vez de fazer música em equipe.";
+    document.getElementById("v2Summary").textContent = "Deci & Bel querem que todo mundo dispute volume no palco, criando barulho em vez de fazer música em equipe.";
     document.getElementById("v3Summary").textContent = "Faz você achar que acertar uma vez por sorte já basta e que não precisa mais treinar.";
     document.getElementById("v4Summary").textContent = "Planta o medo do palco e a dúvida antes do show, tentando te travar antes da primeira nota.";
 
@@ -1572,7 +1572,7 @@
 
     document.getElementById("noticeTxt").innerHTML = "<strong>Atenção às bandas:</strong> Cada grupo tem seu horário marcado de ensaio. Confirme seu horário com a secretaria!";
     document.getElementById("ensLocation").innerHTML = "<strong>Local:</strong> Sede da Guitarríssima — Rua Coronel Corte Real, 889 - Petrópolis, Porto Alegre.";
-    document.getElementById("ensVillainSubtitle").textContent = "Vilão Revelado: Copião! Prepare sua banda com Autenticidade.";
+    document.getElementById("ensVillainSubtitle").textContent = "Vilões Revelados: Copião e Deci & Bel! Prepare sua banda com Autenticidade e Escuta.";
 
     document.getElementById("sessRecapPrefix").textContent = "Até aqui, a Liga SuperSonoros já destravou os quatro superpoderes essenciais:";
     document.getElementById("sessInfoLocation").innerHTML = "<strong>Local:</strong> Teatro Unisinos — Av. Dr. Nilo Peçanha, 1600 - Boa Vista, Porto Alegre.";
@@ -1605,15 +1605,15 @@
       superpoder: "Autenticidade: a coragem de ter som próprio!"
     },
     v2: {
-      code: "VILÃO 2",
+      code: "DECI & BEL",
       color: "#D9A62B",
-      img: "vilao2.png",
+      img: "deciebel.png",
       isBoss: false,
-      status: "Identidade sob sigilo",
-      quem: "Uma parceria agitada onde uma parte age por impulso e a outra sempre quer se sobressair. Nenhuma delas se abre para perceber o ambiente e os parceiros.",
-      motivacao: "Acham que quem faz mais barulho é o melhor músico, abafando os detalhes da música.",
-      posturas: ["'Aumenta o volume pra todo mundo me ouvir!'", "'O importante é eu aparecer sozinho!'"],
-      derrota: "Saber ouvir a banda! Entender a hora de mandar ver no solo e a hora de apoiar a base para o som em grupo ficar perfeito.",
+      status: "Identidade Revelada!",
+      quem: "Uma parceria explosiva! Deci age por puro impulso de volume e Bel quer sempre que seu som sobressaia ao de todo mundo. Juntas, tentam abafar o equilíbrio da banda inteira.",
+      motivacao: "Acham que quem faz mais barulho é o melhor músico, destruindo a harmonia e a sintonia do grupo.",
+      posturas: ["'Aumenta o volume no talo pra todo mundo ouvir!'", "'Quem toca mais alto é quem manda no palco!'", "'Não precisa ouvir o colega, só toca o seu mais alto!'"],
+      derrota: "Saber ouvir a banda! Entender a hora de mandar ver no solo e a hora de apoiar a base para o som em conjunto soar impecável.",
       superpoder: "Escuta: tocar junto e em sintonia com a banda!"
     },
     v3: {
@@ -1672,7 +1672,7 @@
     } else {
       avatarHtml = 
         '<div class="dossier-avatar">' +
-          '<img src="' + v.img + '" alt="' + v.code + '" style="width:100%;height:100%;object-fit:contain;filter:drop-shadow(2px 2px 0 rgba(0,0,0,0.15));" onerror="if(!this.dataset.tried){this.dataset.tried=\'1\';this.src=\'copiao.jpg\';}" />' +
+          '<img src="' + v.img + '" alt="' + v.code + '" style="width:100%;height:100%;object-fit:contain;filter:drop-shadow(2px 2px 0 rgba(0,0,0,0.15));" onerror="if(!this.dataset.tried){this.dataset.tried=\'1\';this.src=\'deciebel.jpg\';}" />' +
         '</div>' +
         '<div>' +
           '<h2 style="font-family:\'Bangers\', cursive;font-size:25px;margin:0 0 2px;color:' + v.color + ';-webkit-text-stroke:0.5px var(--ink);">' + v.code + '</h2>' +
@@ -1684,15 +1684,15 @@
       '<div class="dossier-stamp">ARQUIVO CONFIDENCIAL // LIGA SUPERSONOROS</div>' +
       '<div class="dossier-header">' + avatarHtml + '</div>' +
       '<div class="dossier-section">' +
-        '<div class="dossier-section-title" style="color:var(--ink);">Como ele age:</div>' +
+        '<div class="dossier-section-title" style="color:var(--ink);">Como age(m):</div>' +
         '<p style="margin:0;">' + v.quem + '</p>' +
       '</div>' +
       '<div class="dossier-section">' +
-        '<div class="dossier-section-title" style="color:var(--red);">O plano dele:</div>' +
+        '<div class="dossier-section-title" style="color:var(--red);">O plano:</div>' +
         '<p style="margin:0;">' + v.motivacao + '</p>' +
       '</div>' +
       '<div class="dossier-section">' +
-        '<div class="dossier-section-title" style="color:#555;">Frases que ele tenta espalhar:</div>' +
+        '<div class="dossier-section-title" style="color:#555;">Frases que tentam espalhar:</div>' +
         '<ul style="margin:4px 0;padding-left:18px;font-style:italic;">' + posturasHtml + '</ul>' +
       '</div>' +
       '<div class="dossier-section" style="background:#FFF9E6;border-left:4px solid ' + v.color + ';padding:8px 10px;border-radius:6px;">' +
@@ -1913,12 +1913,17 @@
     if (window.innerWidth < 1220) return;
 
     if (tabName === "historia") {
-      const vImages = ['copiao.png', 'vilao2.png', 'vilao3.png', 'vilao4.png'];
+      const vImages = ['copiao.png', 'deciebel.png', 'vilao3.png', 'vilao4.png'];
       vImages.forEach((src, idx) => {
         const img = document.createElement('img');
         img.src = src;
         img.className = 'ghost-villain';
-        img.onerror = function(){ if(!this.dataset.tried){ this.dataset.tried='1'; this.src='copiao.jpg'; } };
+        img.onerror = function(){ 
+          if(!this.dataset.tried){ 
+            this.dataset.tried='1'; 
+            this.src = src.replace('.png', '.jpg'); 
+          } 
+        };
         placeGhostInSector(img, idx);
         
         img.addEventListener('mouseenter', function() {
@@ -2028,7 +2033,7 @@
         document.getElementById('huntCount').textContent = "0";
       }
 
-      const vImages = ['copiao.png', 'vilao2.png', 'vilao3.png', 'vilao4.png'];
+      const vImages = ['copiao.png', 'deciebel.png', 'vilao3.png', 'vilao4.png'];
       const vh = window.innerHeight;
       const slotsY = [
         Math.max(80, vh * 0.12),
@@ -2169,7 +2174,7 @@
       ];
       var R={
         autenticidade:{c:"#8E5FC7",n:"Autenticidade",e:"Ensaio 1 (vs Copião)",d:"Seu superpoder é a Autenticidade! Você tem estilo próprio, não cai na lábia do Copião e faz a sua música com personalidade!"},
-        escuta:{c:"#D9A62B",n:"Escuta",e:"Ensaio 2 (vs Vilão 2)",d:"Seu superpoder é a Escuta! Você sabe ouvir a banda, equilibra o som e faz a música do grupo soar perfeita em conjunto!"},
+        escuta:{c:"#D9A62B",n:"Escuta",e:"Ensaio 2 (vs Deci & Bel)",d:"Seu superpoder é a Escuta! Você sabe ouvir a banda, equilibra o som e faz a música do grupo soar perfeita em conjunto!"},
         disciplina:{c:"#E8792B",n:"Disciplina",e:"Ensaio 3 (vs Vilão 3)",d:"Seu superpoder é a Disciplina! Você não depende da sorte: com foco e o método do Repeteco, você conquista domínio de verdade!"},
         iniciativa:{c:"#3CB878",n:"Iniciativa",e:"Ensaio 4 (vs Vilão 4)",d:"Seu superpoder é a Iniciativa! Mesmo com aquele frio na barriga, você dá o primeiro acorde e faz a música acontecer!"}
       };
@@ -2661,7 +2666,7 @@
           ]
         },
         {
-          threat: "A Ameaça #2 ataca: O palco virou um caos com todo mundo disputando volume!",
+          threat: "Deci & Bel atacam: O palco virou um caos com todo mundo disputando volume!",
           needed: "escuta",
           options: [
             { id: "escuta",        text: "Escuto o grupo com atenção e equilibro meu volume!", color: "#D9A62B" },
