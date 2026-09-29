@@ -147,12 +147,12 @@
 
   .header-intro{text-align:center; margin-bottom:16px; padding:0 4px;}
   .eyebrow{
-    display:inline-block; font-family:'Bangers', Impact, sans-serif; font-size:clamp(12px, 3.2vw, 16px); letter-spacing:1px;
+    display:inline-block; font-family:'Bangers', cursive; font-size:clamp(12px, 3.2vw, 16px); letter-spacing:1px;
     text-transform:uppercase; background:var(--ink); color:var(--yellow); padding:5px 14px;
     border-radius:999px; margin-bottom:8px; text-shadow:1px 1px 0 rgba(0,0,0,0.4);
   }
   h1{
-    font-family:'Bangers', Impact, sans-serif; font-size:clamp(22px, 6vw, 40px); letter-spacing:1.2px;
+    font-family:'Bangers', cursive; font-size:clamp(22px, 6vw, 40px); letter-spacing:1.2px;
     text-transform:uppercase; line-height:1.05; color:var(--yellow);
     -webkit-text-stroke:1px var(--ink); text-shadow:2px 2px 0 var(--ink);
     margin:0 0 8px; text-align:center;
@@ -180,7 +180,7 @@
     flex-wrap:nowrap;
   }
   .tab{
-    flex:1; text-align:center; font-family:'Bangers', Impact, sans-serif; font-size:clamp(12px, 3.2vw, 19px); letter-spacing:.6px;
+    flex:1; text-align:center; font-family:'Bangers', cursive; font-size:clamp(12px, 3.2vw, 19px); letter-spacing:.6px;
     text-transform:uppercase; background:#fff; border:2.5px solid var(--ink); border-radius:10px;
     padding:8px 2px; cursor:pointer; box-shadow:2px 2px 0 var(--ink);
     transition:transform .12s ease, box-shadow .12s ease;
@@ -220,7 +220,7 @@
   }
   .comic-tag{
     position:absolute; top:-12px; left:12px; background:var(--ink); color:var(--yellow);
-    font-family:'Bangers', Impact, sans-serif; font-size:11.5px; letter-spacing:1px; padding:3px 10px;
+    font-family:'Bangers', cursive; font-size:11.5px; letter-spacing:1px; padding:3px 10px;
     border-radius:6px; text-transform:uppercase;
   }
 
@@ -228,7 +228,7 @@
     text-align:center; margin:8px 0 6px;
   }
   .comic-badge-act{
-    display:inline-block; font-family:'Bangers', Impact, sans-serif; font-size:15px; letter-spacing:1px;
+    display:inline-block; font-family:'Bangers', cursive; font-size:15px; letter-spacing:1px;
     text-transform:uppercase; background:var(--yellow); color:var(--ink); border:2.5px solid var(--ink);
     padding:4px 16px; border-radius:999px; box-shadow:3px 3px 0 var(--ink); margin-bottom:4px;
   }
@@ -275,7 +275,7 @@
     border:2.5px solid var(--ink);
     border-bottom:none;
     border-radius:8px 8px 0 0;
-    font-family:'Bangers', Impact, sans-serif;
+    font-family:'Bangers', cursive;
     font-size:11px;
     letter-spacing:1px;
     text-transform:uppercase;
@@ -353,7 +353,7 @@
   }
   .btn-whats{
     display:inline-flex; align-items:center; justify-content:center; gap:8px; background:var(--whatsapp); color:#fff;
-    font-family:'Bangers', Impact, sans-serif; font-size:15px; letter-spacing:1px; text-transform:uppercase;
+    font-family:'Bangers', cursive; font-size:15px; letter-spacing:1px; text-transform:uppercase;
     padding:9px 14px; border-radius:10px; border:2.5px solid var(--ink); text-decoration:none;
     box-shadow:3px 3px 0 var(--ink); text-shadow:1px 1px 0 rgba(0,0,0,0.4); flex-shrink:0;
     width:100%;
@@ -444,7 +444,7 @@
   .item-dot{
     width:40px; height:40px; border-radius:50%; flex-shrink:0; display:flex;
     align-items:center; justify-content:center;
-    color:#fff; font-family:'Bangers', Impact, sans-serif; font-size:18px; letter-spacing:.5px;
+    color:#fff; font-family:'Bangers', cursive; font-size:18px; letter-spacing:.5px;
     border:2px solid var(--ink); text-shadow:1.5px 1.5px 0 var(--ink);
   }
   .item-info{flex:1; min-width:0; word-break:break-word;}
@@ -498,7 +498,7 @@
 
   .btn{
     display:flex; align-items:center; justify-content:center; gap:8px; width:100%; border:2.5px solid var(--ink); border-radius:10px;
-    background:var(--yellow); color:var(--ink); font-family:'Bangers', Impact, sans-serif; font-size:15px; letter-spacing:1px;
+    background:var(--yellow); color:var(--ink); font-family:'Bangers', cursive; font-size:15px; letter-spacing:1px;
     text-transform:uppercase; padding:9px 12px; cursor:pointer; box-shadow:3px 3px 0 var(--ink); text-decoration:none;
     text-align:center;
   }
@@ -523,7 +523,7 @@
   }
   .lineup-row:last-child{border-bottom:none;}
   .lineup-order{
-    font-family:'Bangers', Impact, sans-serif;
+    font-family:'Bangers', cursive;
     background:var(--blue);
     color:#fff;
     border:2px solid var(--ink);
@@ -569,7 +569,7 @@
   .agenda-list li{margin-bottom:5px;}
   .agenda-list li:last-child{margin-bottom:0;}
 
-  /* VISUALIZADOR DE FOTOS (CARROSSEL COM FOTO GRANDE) */
+  /* VISUALIZADOR DE FOTOS (CARROSSEL COM FOTO GRANDE - PURO DO CÓDIGO PERFEITO) */
   .photo-viewer-wrap{
     display: flex;
     flex-direction: column;
@@ -1215,7 +1215,7 @@
           </div>
 
           <div class="section-title">O que faremos no ensaio</div>
-          <div id="ensAgendaBox"></div>
+          <div id="ensAgendaBox" style="width:100%; max-width:100%;"></div>
         </div>
 
         <div class="panel" style="margin-bottom:0;">
@@ -1666,17 +1666,17 @@
       avatarHtml = 
         '<div class="boss-mystery-avatar">?</div>' +
         '<div>' +
-          '<h2 style="font-family:\'Bangers\', cursive;font-size:26px;margin:0 0 2px;color:var(--red);-webkit-text-stroke:0.5px var(--ink);">' + v.code + '</h2>' +
-          '<div style="font-size:11.5px;font-weight:900;color:var(--red);letter-spacing:0.5px;">SINAL CODIFICADO // IDENTIDADE SOB SIGILO</div>' +
+          '<h2 style="font-family:\'Bangers\', cursive;font-size:24px;margin:0 0 2px;color:var(--red);-webkit-text-stroke:0.5px var(--ink);">' + v.code + '</h2>' +
+          '<div style="font-size:11px;font-weight:900;color:var(--red);letter-spacing:0.5px;">SINAL CODIFICADO // IDENTIDADE SOB SIGILO</div>' +
         '</div>';
     } else {
       avatarHtml = 
         '<div class="dossier-avatar">' +
-          '<img src="' + v.img + '" alt="' + v.code + '" style="width:100%;height:100%;object-fit:contain;filter:drop-shadow(2px 2px 0 rgba(0,0,0,0.15));" onerror="if(!this.dataset.tried){this.dataset.tried=\'1\';this.src=\'deciebel.jpg\';}" />' +
+          '<img src="' + v.img + '" alt="' + v.code + '" style="width:100%;height:100%;object-fit:contain;filter:drop-shadow(2px 2px 0 rgba(0,0,0,0.15));" onerror="if(!this.dataset.tried){this.dataset.tried=\'1\';this.src=\'deciebel.jpg\';}else if(this.dataset.tried===\'1\'){this.dataset.tried=\'2\';this.src=\'vilao2.png\';}" />' +
         '</div>' +
         '<div>' +
-          '<h2 style="font-family:\'Bangers\', cursive;font-size:25px;margin:0 0 2px;color:' + v.color + ';-webkit-text-stroke:0.5px var(--ink);">' + v.code + '</h2>' +
-          '<div style="font-size:12px;color:#666;">Status: ' + (v.status || "Identidade sob sigilo") + '</div>' +
+          '<h2 style="font-family:\'Bangers\', cursive;font-size:24px;margin:0 0 2px;color:' + v.color + ';-webkit-text-stroke:0.5px var(--ink);">' + v.code + '</h2>' +
+          '<div style="font-size:11.5px;color:#666;">Status: ' + (v.status || "Identidade sob sigilo") + '</div>' +
         '</div>';
     }
 
@@ -1698,7 +1698,7 @@
       '<div class="dossier-section" style="background:#FFF9E6;border-left:4px solid ' + v.color + ';padding:8px 10px;border-radius:6px;">' +
         '<div class="dossier-section-title" style="color:' + v.color + ';">Como vencer essa ameaça:</div>' +
         '<p style="margin:0 0 4px;">' + v.derrota + '</p>' +
-        '<div style="font-size:12.5px;font-weight:900;color:var(--ink);">Superpoder destravado: <span style="color:' + v.color + ';">' + v.superpoder + '</span></div>' +
+        '<div style="font-size:12px;font-weight:900;color:var(--ink);">Superpoder destravado: <span style="color:' + v.color + ';">' + v.superpoder + '</span></div>' +
       '</div>' +
       '<button class="btn-close-bottom" onclick="closeVillainModal()">✕ Fechar Dossiê</button>';
 
@@ -1724,7 +1724,7 @@
   }
 
   /* ========================================================
-     3. VISUALIZADOR DE FOTOS (100% PURO E DIRETO)
+     3. VISUALIZADOR DE FOTOS (100% PURO DO CÓDIGO PERFEITO)
      ======================================================== */
   let currentEnsaioPhotos = [];
   let currentPhotoIndex = 0;
