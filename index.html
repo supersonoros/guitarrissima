@@ -41,6 +41,7 @@
     max-width:1180px;
     position:relative;
     z-index:2;
+    overflow-x:hidden;
   }
 
   /* CAMADA DESKTOP LATERAL */
@@ -550,6 +551,7 @@
     text-shadow:1px 1px 0 rgba(0,0,0,0.35);
   }
 
+  /* CARTÕES PEDAGÓGICOS RESPONSIVOS (SEM ESTOURO) */
   .ens-mission-card{
     background:#FFF9E6; border:2.5px solid var(--ink); border-radius:10px;
     padding:9px 10px; margin-bottom:8px; width:100%; max-width:100%;
@@ -567,7 +569,7 @@
   .agenda-list li{margin-bottom:5px;}
   .agenda-list li:last-child{margin-bottom:0;}
 
-  /* VISUALIZADOR DE FOTOS */
+  /* VISUALIZADOR DE FOTOS (CARROSSEL COM FOTO GRANDE - PURO DO CÓDIGO PERFEITO) */
   .photo-viewer-wrap{
     display: flex;
     flex-direction: column;
@@ -1204,7 +1206,7 @@
           
           <div class="silhouette-card">
             <div class="silhouette-avatar">
-              <img id="ensVillainImg" src="" alt="Vilão" class="silhouette-img" />
+              <img id="ensVillainImg" src="" alt="Silhueta do Vilão" class="silhouette-img" />
             </div>
             <div>
               <div style="font-family:'Bangers', cursive; font-size:19px; letter-spacing:1px; color:var(--ink); text-transform:uppercase;" id="ensVillainTitle">Ameaça</div>
@@ -1372,7 +1374,7 @@
 
 <script>
   /* ========================================================
-     1. DADOS FUNDAMENTAIS
+     1. DADOS FUNDAMENTAIS COM AS 10 FOTOS REAIS DO ENSAIO 1
      ======================================================== */
   const ENSAIOS = [
     { 
@@ -1465,7 +1467,7 @@
         '</div>' +
         '<div class="ens-narrative-card">' +
           '<div style="font-family:\'Bangers\', cursive; font-size:15px; color:var(--ink); margin-bottom:4px; text-transform:uppercase;">Confronto Pedagógico:</div>' +
-          '<p style="margin:0;">A tentação de achar que acertar uma vez já basta! Enfrentando <strong>O Ensaiador</strong> com a arma secreta do <em>Repeteco</em> para dominar cada nota, vocês ativam a <strong>Disciplina</strong>.</p>' +
+          '<p style="margin:0;">A tentação de achar que acertar uma vez já basta! Usando a arma secreta do <em>Repeteco</em> para dominar cada nota, vocês ativam a <strong>Disciplina</strong>.</p>' +
         '</div>' +
         '<div style="font-family:\'Bangers\', cursive; font-size:15px; color:var(--ink); margin:10px 0 6px; text-transform:uppercase;">Etapas Práticas:</div>' +
         '<ul class="agenda-list">' +
@@ -1561,7 +1563,7 @@
 
     document.getElementById("v1Summary").textContent = "O Copião tenta fazer você ter vergonha do seu estilo e copiar os outros só para parecer seguro.";
     document.getElementById("v2Summary").textContent = "Deci & Bel querem que todo mundo dispute volume no palco, criando barulho em vez de fazer música em equipe.";
-    document.getElementById("v3Summary").textContent = "O Ensaiador faz você achar que acertar uma vez por sorte já basta e que não precisa mais treinar.";
+    document.getElementById("v3Summary").textContent = "Faz você achar que acertar uma vez por sorte já basta e que não precisa mais treinar.";
     document.getElementById("v4Summary").textContent = "Planta o medo do palco e a dúvida antes do show, tentando te travar antes da primeira nota.";
 
     document.getElementById("bossDesc1").textContent = "Nenhum desses desafios surge por acaso. Todos eles tentam enfraquecer o som da banda para alimentar uma força oculta que quer apagar a música boa.";
@@ -1722,7 +1724,7 @@
   }
 
   /* ========================================================
-     3. VISUALIZADOR DE FOTOS
+     3. VISUALIZADOR DE FOTOS (100% PURO DO CÓDIGO PERFEITO)
      ======================================================== */
   let currentEnsaioPhotos = [];
   let currentPhotoIndex = 0;
@@ -2205,7 +2207,7 @@
         var r=R[w];
         document.getElementById("app").innerHTML =
           '<div class="badge" style="background:'+r.c+';">'+r.n.charAt(0)+'</div>'+
-          '<h2 style="margin:2px 0 3px;font-size:20px;font-family:\\'Bangers\\', cursive;letter-spacing:1px;color:'+r.c+';-webkit-text-stroke:0.5px #171512;line-height:1.05;">'+r.n+'</h2><p style="color:#666;font-weight:bold;font-size:11px;margin:0 0 6px;">Destravado no '+r.e+'</p>' +
+          '<h2 style="margin:2px 0 3px;font-size:20px;font-family:\'Bangers\', cursive;letter-spacing:1px;color:'+r.c+';-webkit-text-stroke:0.5px #171512;line-height:1.05;">'+r.n+'</h2><p style="color:#666;font-weight:bold;font-size:11px;margin:0 0 6px;">Destravado no '+r.e+'</p>' +
           '<p style="text-align:left;background:#F4EFE1;padding:7px 9px;border-radius:6px;border-left:3px solid '+r.c+';font-size:12.5px;line-height:1.25;margin:0;">'+r.d+'</p>' +
           '<button class="btn" onclick="restart()">Refazer Quiz</button>';
       }
