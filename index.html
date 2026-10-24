@@ -927,7 +927,7 @@
 
   /* AJUSTE EXCLUSIVO MOBILE */
   @media (max-width: 600px) {
-    body { font-size: 15px; line-height: 1.25; }
+    body { font-size: 15px; line-height: 1.25; padding-left: 18px; padding-right: 18px; }
     p.lede { font-size: 15px; line-height: 1.25; }
     .eyebrow { font-size: 13.5px; padding: 6px 16px; }
     .tab { font-size: 15px; padding: 10px 2px; }
@@ -1477,7 +1477,7 @@
   ];
 
   const SESSIONS = [
-    { id:1, name:"Sessão 1", date:"24/10 (sáb)", color:"#8E5FC7",
+    { id:1, name:"Sessão 1", date:"24/10 (sáb)", time:"16h", color:"#8E5FC7",
       lineup:[
         {nome:"OG + Meninas Cantoras", musica:"Queen Medley"},
         {nome:"Helena Sperotto", musica:"Man I Need"},
@@ -1497,7 +1497,7 @@
         {nome:"Mariana Guimarães", musica:"I Wanna Dance With Somebody"},
         {nome:"No M3rcy", musica:"Quero Te Encontrar"}
       ] },
-    { id:2, name:"Sessão 2", date:"24/10 (sáb)", color:"#2C4E9B",
+    { id:2, name:"Sessão 2", date:"24/10 (sáb)", time:"20h", color:"#2C4E9B",
       lineup:[
         {nome:"OG + Meninas Cantoras", musica:"Queen Medley"},
         {nome:"Bea Leffa", musica:"Die On This Hill"},
@@ -1517,7 +1517,7 @@
         {nome:"Valentina Moretto", musica:"Love In The Dark"},
         {nome:"Joyful Harbor", musica:"Ideologia"}
       ] },
-    { id:3, name:"Sessão 3", date:"25/10 (dom)", color:"#E8792B",
+    { id:3, name:"Sessão 3", date:"25/10 (dom)", time:"13h", color:"#E8792B",
       lineup:[
         {nome:"OG + Meninas Cantoras", musica:"Queen Medley"},
         {nome:"Bella Botelho", musica:"All I Want"},
@@ -1536,7 +1536,7 @@
         {nome:"Vini Dias", musica:"We Are The Champions"},
         {nome:"Metamorfose Maluca", musica:"Do Leme ao Pontal"}
       ] },
-    { id:4, name:"Sessão 4", date:"25/10 (dom)", color:"#3CB878",
+    { id:4, name:"Sessão 4", date:"25/10 (dom)", time:"17h", color:"#3CB878",
       lineup:[
         {nome:"OG + Meninas Cantoras", musica:"Queen Medley"},
         {nome:"Eva Soares", musica:"Perfeitinha"},
@@ -1587,7 +1587,7 @@
           <div class="item-dot" style="background:${s.color};">S${s.id}</div>
           <div class="item-info">
             <div class="item-name">${s.name}</div>
-            <div class="item-meta">${s.date}</div>
+            <div class="item-meta">${s.date} · ${s.time}</div>
           </div>
           <div class="arrow">›</div>
         </div>`;
