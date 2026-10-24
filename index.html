@@ -519,7 +519,7 @@
   }
 
   .lineup-row{
-    display:flex; align-items:center; gap:8px; padding:6px 0; border-bottom:2px dashed #e6e0d2; font-size:13px;
+    display:flex; align-items:flex-start; gap:10px; padding:8px 0; border-bottom:2px dashed #e6e0d2; font-size:13px;
   }
   .lineup-row:last-child{border-bottom:none;}
   .lineup-order{
@@ -538,7 +538,9 @@
     align-items:center;
     justify-content:center;
   }
-  .lineup-name{flex:1; font-weight:700; word-break:break-word;}
+  .lineup-info{flex:1; min-width:0;}
+  .lineup-name{font-weight:800; font-size:17px; line-height:1.15; color:var(--ink); word-break:break-word;}
+  .lineup-song{font-size:13px; color:#666; margin-top:2px; word-break:break-word;}
 
   .info-item{display:block; margin-bottom:8px; font-size:13px; line-height:1.2; word-break:break-word;}
   .info-item:last-child{margin-bottom:0;}
@@ -1216,25 +1218,9 @@
   <div id="view-sessoes" class="view">
     <div id="view-sessoes-home">
       
-      <div class="panel common-blur-wrap">
+      <div class="panel">
         <div class="section-title">Sessões do Espetáculo</div>
-        <div id="sessionListLocked" class="grid-2-even common-blur-bg"></div>
-        
-        <div class="common-blur-overlay">
-          <div class="opt4-icon-wrap">
-            <img src="cadeado.png" alt="Cadeado" />
-          </div>
-          <div class="opt4-stamp">SINAL CODIFICADO // ARQUIVO ULTRA-SECRETO</div>
-          <p class="opt4-msg">
-            A ordem dos shows e a divisão dos palcos estão guardadas a sete chaves. As informações serão reveladas em breve!
-          </p>
-          <div class="opt4-bar-wrap">
-            <div class="opt4-bar-fill"></div>
-          </div>
-          <div style="font-size:10.5px; font-family:'Bangers', cursive; color:var(--yellow); letter-spacing:1px; text-shadow:1px 1px 0 #000;">
-            STATUS: DESCRIPTOGRAFANDO ESCALAS DE PALCO...
-          </div>
-        </div>
+        <div id="sessionListLocked" class="grid-2-even"></div>
       </div>
 
     </div>
@@ -1491,14 +1477,85 @@
   ];
 
   const SESSIONS = [
-    { id:1, name:"Sessão 1", date:"24/10 (sáb)", time:"16h", color:"#8E5FC7",
-      lineup:["Banda 1","Banda 2","Intermezzo","Banda 3","Banda 4"] },
-    { id:2, name:"Sessão 2", date:"24/10 (sáb)", time:"20h", color:"#2C4E9B",
-      lineup:["Banda 5","Banda 6","Intermezzo","Banda 7","Banda 8"] },
-    { id:3, name:"Sessão 3", date:"25/10 (dom)", time:"14h", color:"#E8792B",
-      lineup:["Banda 9","Banda 10","Intermezzo","Banda 11","Banda 12"] },
-    { id:4, name:"Sessão 4", date:"25/10 (dom)", time:"18h", color:"#3CB878",
-      lineup:["Banda 13","Banda 14","Intermezzo","Banda 15","Banda 16"] },
+    { id:1, name:"Sessão 1", date:"24/10 (sáb)", color:"#8E5FC7",
+      lineup:[
+        {nome:"OG + Meninas Cantoras", musica:"Queen Medley"},
+        {nome:"Helena Sperotto", musica:"Man I Need"},
+        {nome:"Laura Holmer dos Santos Fett", musica:"Rewrite The Stars"},
+        {nome:"Gansos Metálicos", musica:"Black or White"},
+        {nome:"Artur Klipel", musica:"Good Riddance"},
+        {nome:"Antônia Dolabela", musica:"A Million Dreams"},
+        {nome:"The Six Rockers", musica:"Come Together"},
+        {nome:"Helena Zaniratti", musica:"Love Me Again"},
+        {nome:"Abacates Sonoros", musica:"O Descobridor dos Sete Mares"},
+        {nome:"Laura Coelho", musica:"Just Give Me a Reason"},
+        {nome:"Damaris Mallmann Moll", musica:"Love In The Dark"},
+        {nome:"Paulera Divina", musica:"Learn to Fly"},
+        {nome:"Lulu Brandenburg", musica:"Song About You"},
+        {nome:"Super Barulhentos", musica:"Count On Me"},
+        {nome:"Gustavo Taminato", musica:"My Way"},
+        {nome:"Mariana Guimarães", musica:"I Wanna Dance With Somebody"},
+        {nome:"No M3rcy", musica:"Quero Te Encontrar"}
+      ] },
+    { id:2, name:"Sessão 2", date:"24/10 (sáb)", color:"#2C4E9B",
+      lineup:[
+        {nome:"OG + Meninas Cantoras", musica:"Queen Medley"},
+        {nome:"Bea Leffa", musica:"Die On This Hill"},
+        {nome:"Antônio Miguel", musica:"Gracias A La Vida"},
+        {nome:"Dark Light", musica:"Heroes"},
+        {nome:"Valentina Corrêa", musica:"Don't Stop Me Now"},
+        {nome:"Scypher", musica:"Vital e Sua Moto"},
+        {nome:"Martina Bing Moreira", musica:"Skyfall"},
+        {nome:"Duda Müller", musica:"I Have Nothing"},
+        {nome:"Duotonix", musica:"I Want to Break Free"},
+        {nome:"Anita Ferrari", musica:"Hey There Delilah"},
+        {nome:"Black Velvet", musica:"Bring me to life"},
+        {nome:"Caio Obst", musica:"Back To Friends"},
+        {nome:"Cecília Pavei", musica:"Oceano"},
+        {nome:"OG Guitarríssima", musica:"Bohemian Rhapsody"},
+        {nome:"Luisa Dietrich", musica:"My All"},
+        {nome:"Valentina Moretto", musica:"Love In The Dark"},
+        {nome:"Joyful Harbor", musica:"Ideologia"}
+      ] },
+    { id:3, name:"Sessão 3", date:"25/10 (dom)", color:"#E8792B",
+      lineup:[
+        {nome:"OG + Meninas Cantoras", musica:"Queen Medley"},
+        {nome:"Bella Botelho", musica:"All I Want"},
+        {nome:"Os Barulhos da Noite", musica:"Andar com Fé"},
+        {nome:"Manu Paganella", musica:"Die On This Hill"},
+        {nome:"Sapato Maluco", musica:"Lindo Lago do Amor"},
+        {nome:"Gabi Flores", musica:"Diamonds"},
+        {nome:"O Barulho da Tarde", musica:"O Sol"},
+        {nome:"Valen Leiva", musica:"Risk It All"},
+        {nome:"Explosão Vermelha", musica:"Eye of the Tiger"},
+        {nome:"Giulia Filippini", musica:"Billie Jean"},
+        {nome:"Lis Staats", musica:"Iris"},
+        {nome:"Grupo Vocal Passarinhando", musica:"Aquarela"},
+        {nome:"Vivi Batista", musica:"Everything I Do"},
+        {nome:"Universo Animal", musica:"Odara"},
+        {nome:"Vini Dias", musica:"We Are The Champions"},
+        {nome:"Metamorfose Maluca", musica:"Do Leme ao Pontal"}
+      ] },
+    { id:4, name:"Sessão 4", date:"25/10 (dom)", color:"#3CB878",
+      lineup:[
+        {nome:"OG + Meninas Cantoras", musica:"Queen Medley"},
+        {nome:"Eva Soares", musica:"Perfeitinha"},
+        {nome:"Sofia Velloso", musica:"Wide Awake"},
+        {nome:"Melodia Mágica", musica:"Do Leme ao Pontal"},
+        {nome:"Gigi Fetter", musica:"What's Up?"},
+        {nome:"Os Biruleib's", musica:"Agora Só Falta Você"},
+        {nome:"Davi Fischer", musica:"Don't Look Back In Anger"},
+        {nome:"Guigo Sinclair", musica:"Come Together"},
+        {nome:"Liga dos Instrumentos", musica:"Gonna Fly Now / Eye of the Tiger"},
+        {nome:"Helena Gemelli", musica:"A Million Dreams"},
+        {nome:"Joana Crestani", musica:"You're Still The One"},
+        {nome:"Power Chords", musica:"I'm a Believer"},
+        {nome:"Eloise Gomes", musica:"Dog Days Are Over"},
+        {nome:"Léa Waldman", musica:"Drivers License"},
+        {nome:"Astros Sonoros", musica:"O Sol"},
+        {nome:"Clara Dias", musica:"Sinais De Fogo"},
+        {nome:"Liga dos Sonoros", musica:"O Descobridor dos Sete Mares"}
+      ] },
   ];
 
   function renderEnsaios(){
@@ -1526,11 +1583,11 @@
     list.innerHTML = "";
     SESSIONS.forEach(s => {
       list.innerHTML += `
-        <div class="item-card">
+        <div class="item-card" onclick="openSession(${s.id})">
           <div class="item-dot" style="background:${s.color};">S${s.id}</div>
           <div class="item-info">
             <div class="item-name">${s.name}</div>
-            <div class="item-meta">${s.date} · ${s.time}</div>
+            <div class="item-meta">${s.date}</div>
           </div>
           <div class="arrow">›</div>
         </div>`;
@@ -1826,17 +1883,19 @@
   function openSession(id){
     const s = SESSIONS.find(x=>x.id===id);
     document.getElementById("sessTitle").textContent = s.name;
-    document.getElementById("sessSubtitle").textContent = s.date + " · Início às " + s.time + " · Teatro Unisinos";
+    document.getElementById("sessSubtitle").textContent = s.date + " · Teatro Unisinos";
     
     document.getElementById("body").style.background = s.color;
     updateBrandLogo(s.color);
 
     const box = document.getElementById("lineupList");
     box.innerHTML = "";
-    s.lineup.forEach((band,i)=>{
+    s.lineup.forEach((item,i)=>{
       const row = document.createElement("div");
       row.className = "lineup-row";
-      row.innerHTML = '<span class="lineup-order">#' + (i+1) + '</span><span class="lineup-name">' + band + '</span>';
+      row.innerHTML = '<span class="lineup-order">#' + (i+1) + '</span>' +
+        '<div class="lineup-info"><div class="lineup-name">' + item.nome + '</div>' +
+        '<div class="lineup-song">♪ ' + item.musica + '</div></div>';
       box.appendChild(row);
     });
 
