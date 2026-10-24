@@ -569,7 +569,7 @@
   .agenda-list li{margin-bottom:5px;}
   .agenda-list li:last-child{margin-bottom:0;}
 
-  /* VISUALIZADOR DE FOTOS (CARROSSEL COM FOTO GRANDE - PURO DO CÓDIGO PERFEITO) */
+  /* VISUALIZADOR DE FOTOS */
   .photo-viewer-wrap{
     display: flex;
     flex-direction: column;
@@ -798,21 +798,6 @@
   .dossier-avatar{
     width:85px; height:105px; background:transparent; border:none; border-radius:0;
     display:flex; align-items:center; justify-content:center; padding:0; flex-shrink:0;
-  }
-
-  .boss-mystery-avatar {
-    width: 80px; height: 90px;
-    background: #171512;
-    border: 2.5px dashed var(--yellow);
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--yellow);
-    font-family: 'Bangers', cursive;
-    font-size: 44px;
-    box-shadow: 2.5px 2.5px 0 var(--ink);
-    flex-shrink: 0;
   }
 
   .dossier-section{
@@ -1087,16 +1072,16 @@
           </div>
         </div>
 
-        <!-- VILÃO 4 -->
+        <!-- VILÃO 4: A VÉSPERA -->
         <div class="folder-card-wrap" onclick="openVillainModal('v4')">
           <div class="folder-tab" style="border-top:3px solid var(--green);">Dossiê #04</div>
           <div class="comic-villain-card" style="border-top:4.5px solid var(--green);">
             <div class="villain-avatar-box">
-              <img src="vilao4.png" alt="Vilão 4" class="villain-silhouette" />
+              <img src="vespera.png" alt="A Véspera" class="villain-silhouette" onerror="if(!this.dataset.tried){this.dataset.tried='1';this.src='vespera.jpg';}" />
             </div>
             <div class="villain-body-box">
               <div>
-                <div style="font-family:'Bangers', cursive; font-size:20px; color:var(--green); margin:0 0 2px;">Vilão 4</div>
+                <div style="font-family:'Bangers', cursive; font-size:20px; color:var(--green); margin:0 0 2px;">A Véspera</div>
                 <div id="v4Summary" class="villain-summary-txt"></div>
               </div>
               <div>
@@ -1111,16 +1096,16 @@
 
       </div>
 
-      <!-- CHEFÃO FINAL -->
+      <!-- CHEFÃO FINAL: O DEVORADOR DE SONS -->
       <div class="folder-card-wrap" onclick="openVillainModal('vBoss')">
         <div class="folder-tab" style="background:#171512; color:var(--yellow); border:2.5px solid var(--yellow); border-bottom:none;">Arquivo Confidencial</div>
         <div class="comic-villain-card" style="background:#171512; border:3.5px solid var(--yellow); border-radius:0 18px 18px 18px; box-shadow:4px 4px 0 var(--ink);">
           <div class="villain-avatar-box">
-            <div class="boss-mystery-avatar" style="width:78px; height:90px; font-size:38px; border:2.5px dashed var(--yellow); background:transparent; color:var(--yellow); display:flex; align-items:center; justify-content:center; box-shadow:none;">?</div>
+            <img src="devoradordesons.png" alt="Devorador de Sons" class="villain-silhouette" onerror="if(!this.dataset.tried){this.dataset.tried='1';this.src='devoradordesons.jpg';}" />
           </div>
           <div class="villain-body-box">
             <div>
-              <div style="font-family:'Bangers', cursive; font-size:20px; color:var(--yellow); margin:0 0 2px; letter-spacing:1px; text-transform:uppercase;">A Ameaça Final</div>
+              <div style="font-family:'Bangers', cursive; font-size:20px; color:var(--yellow); margin:0 0 2px; letter-spacing:1px; text-transform:uppercase;">Devorador de Sons</div>
               <div id="bossDesc1" class="villain-summary-txt" style="color:rgba(255,255,255,0.9);"></div>
             </div>
             <div>
@@ -1333,7 +1318,7 @@
           <div class="item-dot" style="background:var(--red);">⚡</div>
           <div class="item-info">
             <div class="item-name">Batalha Musical</div>
-            <div class="item-meta">Enfrente a Ameaça Final</div>
+            <div class="item-meta">Enfrente o Devorador de Sons</div>
           </div>
           <div class="arrow">›</div>
         </div>
@@ -1480,8 +1465,8 @@
       name:"Ensaio 4: Iniciativa", 
       date:"17/10 (sáb)", 
       color:"#3CB878", 
-      villain:"Vilão 4", 
-      img:"vilao4.png", 
+      villain:"A Véspera", 
+      img:"vespera.png", 
       metaDesc:"Marcação de palco e passagem geral do show",
       calloutText: null,
       photosDisclaimer: "As fotos da galera serão publicadas aqui logo após o término do ensaio!",
@@ -1564,15 +1549,15 @@
     document.getElementById("v1Summary").textContent = "O Copião tenta fazer você ter vergonha do seu estilo e copiar os outros só para parecer seguro.";
     document.getElementById("v2Summary").textContent = "Deci & Bel querem que todo mundo dispute volume no palco, criando barulho em vez de fazer música em equipe.";
     document.getElementById("v3Summary").textContent = "Faz você achar que acertar uma vez por sorte já basta e que não precisa mais treinar.";
-    document.getElementById("v4Summary").textContent = "Planta o medo do palco e a dúvida antes do show, tentando te travar antes da primeira nota.";
+    document.getElementById("v4Summary").textContent = "A Véspera tenta plantar o medo do palco e a dúvida antes do show, tentando te travar antes da primeira nota.";
 
-    document.getElementById("bossDesc1").textContent = "Nenhum desses desafios surge por acaso. Todos eles tentam enfraquecer o som da banda para alimentar uma força oculta que quer apagar a música boa.";
+    document.getElementById("bossDesc1").textContent = "O Devorador de Sons se alimenta de músicas tocadas sem alma, tentando calar os palcos e apagar a energia da cidade.";
 
     document.getElementById("epilogueTxt").textContent = "Ninguém vira fera no instrumento por mágica na hora do show. A segurança nasce em cada ensaio bem aproveitado, na atenção com a banda e na vontade de fazer acontecer!";
 
     document.getElementById("noticeTxt").innerHTML = "<strong>Atenção às bandas:</strong> Cada grupo tem seu horário marcado de ensaio. Confirme seu horário com a secretaria!";
     document.getElementById("ensLocation").innerHTML = "<strong>Local:</strong> Sede da Guitarríssima — Rua Coronel Corte Real, 889 - Petrópolis, Porto Alegre.";
-    document.getElementById("ensVillainSubtitle").textContent = "Vilões Revelados: Copião, Deci & Bel e O Ensaiador! Prepare sua banda com Autenticidade, Escuta e Disciplina.";
+    document.getElementById("ensVillainSubtitle").textContent = "Vilões Revelados: Copião, Deci & Bel, O Ensaiador e A Véspera! Prepare sua banda com os 4 superpoderes.";
 
     document.getElementById("sessRecapPrefix").textContent = "Até aqui, a Liga SuperSonoros já destravou os quatro superpoderes essenciais:";
     document.getElementById("sessInfoLocation").innerHTML = "<strong>Local:</strong> Teatro Unisinos — Av. Dr. Nilo Peçanha, 1600 - Boa Vista, Porto Alegre.";
@@ -1629,27 +1614,28 @@
       superpoder: "Disciplina: transformar treino em confiança de verdade!"
     },
     v4: {
-      code: "VILÃO 4",
+      code: "A VÉSPERA",
       color: "#3CB878",
-      img: "vilao4.png",
+      img: "vespera.png",
       isBoss: false,
-      status: "Identidade sob sigilo",
-      quem: "Aquela dúvida que dá bem na hora de subir no palco ou antes de dar a primeira nota.",
-      motivacao: "Detesta ver a galera mandando bem e se divertindo no palco. Ele quer que você trave de nervoso.",
-      posturas: ["'Será que você tá pronto?'", "'E se der branco na frente de todo mundo? Melhor deixar pra lá...'"],
-      derrota: "Dar a primeira nota! O frio na barriga todo músico sente; a coragem é começar a tocar mesmo assim!",
+      status: "Identidade Revelada!",
+      quem: "A vilã que ataca com a ansiedade da última hora, trazendo aquele frio na barriga antes da primeira nota.",
+      motivacao: "Detesta ver a galera mandando bem e se divertindo no palco. Ela quer que você trave de nervoso e desista antes de tentar.",
+      posturas: ["'Será que você tá mesmo pronto?'", "'E se der branco na frente de todo mundo? Melhor nem tentar...'"],
+      derrota: "Dar a primeira nota! O frio na barriga todo mundo sente; a verdadeira coragem é começar a tocar mesmo assim!",
       superpoder: "Iniciativa: dar o primeiro acorde e arrasar no show!"
     },
     vBoss: {
-      code: "AMEAÇA FINAL",
+      code: "DEVORADOR DE SONS",
       color: "#E63946",
+      img: "devoradordesons.png",
       isBoss: true,
-      status: "Identidade sob sigilo",
-      quem: "A força que tenta acabar com a energia musical da cidade. Ele se alimenta de músicas tocadas sem vontade, sem ensaio e sem união.",
-      motivacao: "Quer calar os palcos e encher a cidade de som sem vida.",
-      posturas: ["Alimenta-se do medo, do desleixo nos ensaios e da falta de união da banda."],
-      derrota: "Tocar com a alma! Quando a banda junta autenticidade, escuta, disciplina e atitude, o som fica imparável!",
-      superpoder: "A união de todas as forças sonoras no palco!"
+      status: "Identidade Revelada!",
+      quem: "A criatura colossal que engole a energia musical da cidade. Ele se alimenta de músicas tocadas sem paixão, sem ensaio e sem união.",
+      motivacao: "Quer calar todos os instrumentos e transformar a cidade em um lugar sem ritmo e sem cor.",
+      posturas: ["Alimenta-se do desleixo, do medo antes do show e da falta de sintonia na banda."],
+      derrota: "Tocar com a alma! Quando a banda une autenticidade, escuta, disciplina e atitude, o som fica imparável!",
+      superpoder: "A união de todas as forças sonoras no grande palco!"
     }
   };
 
@@ -1661,24 +1647,14 @@
     
     let posturasHtml = v.posturas.map(p => "<li>" + p + "</li>").join("");
 
-    let avatarHtml = "";
-    if (v.isBoss) {
-      avatarHtml = 
-        '<div class="boss-mystery-avatar">?</div>' +
-        '<div>' +
-          '<h2 style="font-family:\'Bangers\', cursive;font-size:24px;margin:0 0 2px;color:var(--red);-webkit-text-stroke:0.5px var(--ink);">' + v.code + '</h2>' +
-          '<div style="font-size:11px;font-weight:900;color:var(--red);letter-spacing:0.5px;">SINAL CODIFICADO // IDENTIDADE SOB SIGILO</div>' +
-        '</div>';
-    } else {
-      avatarHtml = 
-        '<div class="dossier-avatar">' +
-          '<img src="' + v.img + '" alt="' + v.code + '" style="width:100%;height:100%;object-fit:contain;filter:drop-shadow(2px 2px 0 rgba(0,0,0,0.15));" onerror="if(!this.dataset.tried){this.dataset.tried=\'1\';this.src=\'' + v.img.replace('.png','.jpg') + '\';}" />' +
-        '</div>' +
-        '<div>' +
-          '<h2 style="font-family:\'Bangers\', cursive;font-size:24px;margin:0 0 2px;color:' + v.color + ';-webkit-text-stroke:0.5px var(--ink);">' + v.code + '</h2>' +
-          '<div style="font-size:11.5px;color:#666;">Status: ' + (v.status || "Identidade sob sigilo") + '</div>' +
-        '</div>';
-    }
+    let avatarHtml = 
+      '<div class="dossier-avatar">' +
+        '<img src="' + v.img + '" alt="' + v.code + '" style="width:100%;height:100%;object-fit:contain;filter:drop-shadow(2px 2px 0 rgba(0,0,0,0.15));" onerror="if(!this.dataset.tried){this.dataset.tried=\'1\';this.src=\'' + v.img.replace('.png','.jpg') + '\';}" />' +
+      '</div>' +
+      '<div>' +
+        '<h2 style="font-family:\'Bangers\', cursive;font-size:24px;margin:0 0 2px;color:' + v.color + ';-webkit-text-stroke:0.5px var(--ink);">' + v.code + '</h2>' +
+        '<div style="font-size:11.5px;color:#666;">Status: ' + v.status + '</div>' +
+      '</div>';
 
     body.innerHTML = 
       '<div class="dossier-stamp">ARQUIVO CONFIDENCIAL // LIGA SUPERSONOROS</div>' +
@@ -1692,7 +1668,7 @@
         '<p style="margin:0;">' + v.motivacao + '</p>' +
       '</div>' +
       '<div class="dossier-section">' +
-        '<div class="dossier-section-title" style="color:#555;">Frases que tentam espalhar:</div>' +
+        '<div class="dossier-section-title" style="color:#555;">Frases que tenta(m) espalhar:</div>' +
         '<ul style="margin:4px 0;padding-left:18px;font-style:italic;">' + posturasHtml + '</ul>' +
       '</div>' +
       '<div class="dossier-section" style="background:#FFF9E6;border-left:4px solid ' + v.color + ';padding:8px 10px;border-radius:6px;">' +
@@ -1724,7 +1700,7 @@
   }
 
   /* ========================================================
-     3. VISUALIZADOR DE FOTOS (100% PURO DO CÓDIGO PERFEITO)
+     3. VISUALIZADOR DE FOTOS
      ======================================================== */
   let currentEnsaioPhotos = [];
   let currentPhotoIndex = 0;
@@ -1913,7 +1889,7 @@
     if (window.innerWidth < 1220) return;
 
     if (tabName === "historia") {
-      const vImages = ['copiao.png', 'deciebel.png', 'oensaiador.png', 'vilao4.png'];
+      const vImages = ['copiao.png', 'deciebel.png', 'oensaiador.png', 'vespera.png'];
       vImages.forEach((src, idx) => {
         const img = document.createElement('img');
         img.src = src;
@@ -2033,7 +2009,7 @@
         document.getElementById('huntCount').textContent = "0";
       }
 
-      const vImages = ['copiao.png', 'deciebel.png', 'oensaiador.png', 'vilao4.png'];
+      const vImages = ['copiao.png', 'deciebel.png', 'oensaiador.png', 'vespera.png'];
       const vh = window.innerHeight;
       const slotsY = [
         Math.max(80, vh * 0.12),
@@ -2176,7 +2152,7 @@
         autenticidade:{c:"#8E5FC7",n:"Autenticidade",e:"Ensaio 1 (vs Copião)",d:"Seu superpoder é a Autenticidade! Você tem estilo próprio, não cai na lábia do Copião e faz a sua música com personalidade!"},
         escuta:{c:"#D9A62B",n:"Escuta",e:"Ensaio 2 (vs Deci & Bel)",d:"Seu superpoder é a Escuta! Você sabe ouvir a banda, equilibra o som e faz a música do grupo soar perfeita em conjunto!"},
         disciplina:{c:"#E8792B",n:"Disciplina",e:"Ensaio 3 (vs O Ensaiador)",d:"Seu superpoder é a Disciplina! Você não depende da sorte: com foco e o método do Repeteco, você conquista domínio de verdade!"},
-        iniciativa:{c:"#3CB878",n:"Iniciativa",e:"Ensaio 4 (vs Vilão 4)",d:"Seu superpoder é a Iniciativa! Mesmo com aquele frio na barriga, você dá o primeiro acorde e faz a música acontecer!"}
+        iniciativa:{c:"#3CB878",n:"Iniciativa",e:"Ensaio 4 (vs A Véspera)",d:"Seu superpoder é a Iniciativa! Mesmo com aquele frio na barriga, você dá o primeiro acorde e faz a música acontecer!"}
       };
       var cur=0, sc={autenticidade:0,escuta:0,disciplina:0,iniciativa:0};
       function dots(){var h="";for(var i=0;i<Q.length;i++){h+='<span class="dot'+(i<cur?" done":"")+'">'+(i+1)+'</span>';}return h;}
@@ -2644,7 +2620,7 @@
       .status{font-size:13.5px;font-family:'Bangers', cursive;letter-spacing:0.8px;margin-top:6px;min-height:16px;color:#F4C531;text-transform:uppercase;}
     </style></head><body>
     <div class="box">
-      <h1>Ameaça Final</h1>
+      <h1>Devorador de Sons</h1>
       <div class="hp-bar"><div class="hp-fill" id="hp"></div></div>
       <div class="boss-sprite" id="boss">👾</div>
       <div class="prompt" id="prompt">Carregando desafio...</div>
@@ -2686,7 +2662,7 @@
           ]
         },
         {
-          threat: "A Ameaça #4 planta a dúvida: 'E se der branco na frente de todos? Melhor não tocar hoje...'",
+          threat: "A Véspera planta a dúvida: 'E se der branco na frente de todos? Melhor nem tentar...'",
           needed: "iniciativa",
           options: [
             { id: "iniciativa",    text: "Dou a primeira nota e toco mesmo com frio na barriga!", color: "#3CB878" },
@@ -2701,7 +2677,7 @@
         if(bossHp <= 0) {
           document.getElementById("boss").textContent = "💥🎉";
           document.getElementById("prompt").textContent = "VITÓRIA DA LIGA! O SOM FOI SALVO!";
-          document.getElementById("status").textContent = "Os 4 superpoderes derrotaram a Ameaça Final!";
+          document.getElementById("status").textContent = "Os 4 superpoderes derrotaram o Devorador de Sons!";
           document.getElementById("actionsBox").innerHTML = "";
           return;
         }
