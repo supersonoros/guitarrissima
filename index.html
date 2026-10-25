@@ -707,6 +707,19 @@
     gap: 6px;
     margin-top: 28px;
   }
+  .footer-partners {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 14px 18px;
+  }
+  .footer-partner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+  }
   .footer-label {
     font-family: 'Bangers', Impact, sans-serif;
     font-size: 14px;
@@ -726,6 +739,11 @@
     justify-content: center;
   }
   .logo-gta-footer {
+    height: 32px;
+    width: auto;
+    object-fit: contain;
+  }
+  .logo-pavei-footer {
     height: 32px;
     width: auto;
     object-fit: contain;
@@ -1313,9 +1331,19 @@
   </div>
 
   <footer class="footer-signature">
-    <div class="footer-label">Realizado por:</div>
-    <div class="footer-logo-card">
-      <img src="logo-gta.png" alt="Guitarríssima" class="logo-gta-footer">
+    <div class="footer-partners">
+      <div class="footer-partner">
+        <div class="footer-label">Realizado por:</div>
+        <div class="footer-logo-card">
+          <img src="logo-gta.png" alt="Guitarríssima" class="logo-gta-footer">
+        </div>
+      </div>
+      <div class="footer-partner">
+        <div class="footer-label">Patrocínio:</div>
+        <div class="footer-logo-card">
+          <img src="logo-pavei.png" alt="Pavei Empreendimentos" class="logo-pavei-footer">
+        </div>
+      </div>
     </div>
     <div class="footer-sub">Ser único é o seu superpoder.</div>
   </footer>
